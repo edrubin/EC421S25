@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2023.3.17)  31 MAR 2025 18:58
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2023.3.17)  31 MAR 2025 19:00
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/edwardr/Dropbox/Teaching/Oregon/EC421S25/syllabus/syllabus.tex
@@ -651,7 +651,7 @@ Here is how much of LuaTeX's memory you used:
  79 fonts using 13545903 bytes
  68i,12n,84p,935b,823s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/edwardr/Library/Fonts/FiraSansExtraCondensed-BoldItalic.ttf>{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</Users/edwardr/Library/Fonts/FiraSansExtraCondensed-Italic.ttf></usr/local/texlive/2022/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/local/texlive/2022/texmf-dist/fonts/opentype/public/fontawesome/FontAwesome.otf></Users/edwardr/Library/Fonts/FiraSansExtraCondensed-Bold.ttf></Users/edwardr/Library/Fonts/FiraSansExtraCondensed-Regular.ttf></usr/local/texlive/2022/texmf-dist/fonts/opentype/public/lm/lmmono12-regular.otf></usr/local/texlive/2022/texmf-dist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on syllabus.pdf (5 pages, 85250 bytes).
+Output written on syllabus.pdf (5 pages, 85258 bytes).
 
 PDF statistics: 179 PDF objects out of 1000 (max. 8388607)
  144 compressed objects within 2 object streams

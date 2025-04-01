@@ -1,6 +1,6 @@
 # Fdb version 3
-["lualatex"] 1743472681 "/Users/edwardr/Dropbox/Teaching/Oregon/EC421S25/syllabus/syllabus.tex" "syllabus.pdf" "syllabus" 1743472682
-  "/Users/edwardr/Dropbox/Teaching/Oregon/EC421S25/syllabus/syllabus.tex" 1743472681 16917 a2fc05fbf3b735876093c8186c024a58 ""
+["lualatex"] 1743472841 "/Users/edwardr/Dropbox/Teaching/Oregon/EC421S25/syllabus/syllabus.tex" "syllabus.pdf" "syllabus" 1743472842
+  "/Users/edwardr/Dropbox/Teaching/Oregon/EC421S25/syllabus/syllabus.tex" 1743472841 16917 ed5039928f707ebd21e4c61d7ccb2e00 ""
   "/Users/edwardr/Library/Fonts/FiraSansExtraCondensed-Bold.ttf" 1719231130 496872 cbeaf842332fd9fdf5ba42fc367a0bd8 ""
   "/Users/edwardr/Library/Fonts/FiraSansExtraCondensed-BoldItalic.ttf" 1719231130 514672 c076c1f0f23ccbb61b1a8db0b4cba370 ""
   "/Users/edwardr/Library/Fonts/FiraSansExtraCondensed-Italic.ttf" 1719231130 471784 64def414f63d3f6f00ef1dbcf6847cf6 ""
@@ -185,9 +185,9 @@
   "/usr/local/texlive/2022/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1647637340 13565 30cc2d8cecf79afb1abb4d5c12eb919a ""
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/luahbtex/lualatex.fmt" 1679111952 4558588 60803144bc8471a597ab6c816363d42d ""
-  "syllabus.aux" 1743472682 1732 f6725a0e7170073a0301185b36ea9036 "lualatex"
+  "syllabus.aux" 1743472842 1732 f6725a0e7170073a0301185b36ea9036 "lualatex"
   "syllabus.out" 0 -1 0 "lualatex"
-  "syllabus.tex" 1743472681 16917 a2fc05fbf3b735876093c8186c024a58 ""
+  "syllabus.tex" 1743472841 16917 ed5039928f707ebd21e4c61d7ccb2e00 ""
   (generated)
   "syllabus.aux"
   "syllabus.log"
