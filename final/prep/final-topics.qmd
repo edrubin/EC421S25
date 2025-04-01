@@ -1,0 +1,82 @@
+---
+title: "Final Prep: Topics"
+subtitle: "EC 421: Introduction to Econometrics"
+author: "Edward Rubin"
+format:
+  html:
+    toc: true
+    number-sections: false
+    self-contained: true
+    theme:
+    - cosmo
+    - ed.scss
+---
+
+**README:** The final exam will cover the following topics.
+
+I will also assume you understand the material from the midterm.
+
+As with the midterm, you do not need to memorize proofs. Understand the steps/reasoning. Intuition is paramount. I might ask how you get from one step to the next. I won't ask you to write down a full proof.
+
+## Slide Set 7: Time Series
+
+-   Notation
+-   Assumptions
+-   Static models
+-   Dynamic models
+    -   With lagged explanatory variables
+    -   Autoregressive, distributed lag (ADL) models
+    -   ADL(p,q)
+    -   Long-run vs. short-run effects
+-   Contemporaenous exogeneity
+
+## Slide Set 8: Autocorrelation
+
+-   Definition of autocorrelation
+-   Negative and positive autocorrelation
+-   Equation/formula for AR(p) processes
+-   OLS implications for static models and dynamic models with lagged explanatory variables
+-   OLS implications/bias for dynamic models with lagged dependent variables
+-   Breusch-Godfrey test
+    -   Hypotheses
+    -   Interpretation of results
+    -   Conclusion
+-   Misspecification
+-   FGLS: General idea
+
+## Slide Set 9: Non-Stationary Time Series
+
+-   Definition/requirements of nonstationarity
+    -   Mean
+    -   Variance
+    -   Covariance
+-   Random walks
+-   Spurious correlations
+-   Differencing
+
+## Slide Set 10: Causality
+
+-   Prediction vs. causal inference/estimation
+-   Correlation vs. causation
+-   Reverse causality
+-   Experiments/RCTs
+-   The "ideal experiment" (ideal dataset)
+-   Treatment effects:
+    -   Individual effects
+    -   Average treatment effects
+    -   Constant treatment effects
+-   Selection bias
+
+## Slide Set 11: Instrumental Variables
+
+-   Exogeneity and endogeneity
+-   Requirements for a valid instrument
+    -   Relevant
+    -   Exogenous
+-   Probability limit
+-   First stage and reduced form
+-   Two-stage least squares
+    -   Motivation
+    -   First stage
+    -   Second stage
+-   Interpretation
