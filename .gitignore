@@ -1,0 +1,23 @@
+
+# Temporary holds: Lecture
+
+# Notes cache
+notes/*/slides_cache/*
+
+# Non-review test files
+final/exam-inclass*
+midterm/exam-inclass*
+
+# Problem sets: Assigned
+# PS 0
+problem-sets/000/data-raw*
+# PS 1
+problem-sets/001/data-raw*
+# PS 2
+problem-sets/002/data-raw*
+# PS3
+
+# Misc files
+*.DS_Store
+*.here
+*.Rproj
