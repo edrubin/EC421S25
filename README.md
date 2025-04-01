@@ -14,7 +14,7 @@ The slides below (linked by their topic) are .html files that will only work pro
 
 In case you're interested, I created the slides with [`xaringan`](https://github.com/yihui/xaringan/wiki) in [R](cran.r-project.org). If you are thinking of making your own slides/documents, I would suggest [quarto](https://quarto.org/).
 
-1. [Introduction to "Introduction to Econometrics"](https://raw.githack.com/edrubin/EC421W25/master/notes/01-intro/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/01-intro/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/01-intro/slides.rmd)
+1. [Introduction to "Introduction to Econometrics"](https://raw.githack.com/edrubin/EC421S25/master/notes/01-intro/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421S25/master/notes/01-intro/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421S25/blob/master/notes/01-intro/slides.rmd)
 
 2. [Review of key math/stat/metrics topics](https://raw.githack.com/edrubin/EC421W25/master/notes/02-review/slides.html)<br>Density functions, deriving the OLS estimators, properties of estimators, statistical inference (standard errors, confidence intervals, hypothesis testing), simulation <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/02-review/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/02-review/slides.rmd)
 
