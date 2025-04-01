@@ -6,6 +6,12 @@ Welcome to **Economics 421: Introduction to Econometrics** (Spring 2025) at the 
 
 For information on the course specifics, please see the [syllabus](https://raw.githack.com/edrubin/EC421S25/master/syllabus/syllabus.pdf).
 
+## Office hours
+
+__Edward Rubin:__ Tuesdays: 1:30p–3:00p ([PLC 530](https://map.uoregon.edu/b83e556a1))
+
+__Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
+
 ## Lecture slides
 
 The slides below (linked by their topic) are .html files that will only work properly if you are connected to the internet. If you're going off grid, grab the PDFs (you'll miss out on gifs and interactive plots, but the equations will render correctly).
@@ -94,5 +100,4 @@ Here are links to previous years' course materials as well:
 ## Homework
 
 Please also see the [syllabus](https://raw.githack.com/edrubin/EC421S25/master/syllabus/syllabus.pdf) for specific information on the homework and grade policies.
-
 

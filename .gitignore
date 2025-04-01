@@ -3,6 +3,8 @@
 problem-sets*
 
 # Temporary holds: Lecture
+notes/0[2-9]*
+notes/1*
 
 # Notes cache
 notes/*/slides_cache/*
