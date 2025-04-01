@@ -2,14 +2,6 @@
 
 Welcome to **Economics 421: Introduction to Econometrics** (Spring 2025) at the University of Oregon (taught by [Edward Rubin](https://edrub.in) and [Emily Arnesen](https://emilyarnesen.com/)).
 
-░▒▓████████▓▒░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░   ░▒▓█▓▒░ <br>
-░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓████▓▒░ <br>
-░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░ <br>
-░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░░▒▓██████▓▒░   ░▒▓█▓▒░ <br>
-░▒▓█▓▒░     ░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░ <br>
-░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░ <br>
-░▒▓████████▓▒░▒▓██████▓▒░       ░▒▓█▓▒░▒▓████████▓▒░  ░▒▓█▓▒░ <br>
-
 ## Syllabus
 
 For information on the course specifics, please see the [syllabus](https://raw.githack.com/edrubin/EC421S25/master/syllabus/syllabus.pdf).
