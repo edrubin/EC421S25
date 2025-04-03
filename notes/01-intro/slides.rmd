@@ -618,7 +618,7 @@ You will dive deeper into R in lab, but here six big points about R:
 
 `foo`
 
-`foo <- 2`
+`foo = 2`
 
 `mean(foo)`
 
@@ -647,7 +647,7 @@ Coming from .mono[Stata], here are a few important changes (benefits):
 layout: false
 class: inverse, middle
 
-# Next: Metrics review(s)
+# Next: (More) Metrics review(s)
 
 ---
 exclude: true
