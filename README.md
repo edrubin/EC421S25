@@ -12,6 +12,12 @@ __Edward Rubin:__ Tuesdays: 1:30p–3:00p ([PLC 530](https://map.uoregon.edu/b83
 
 __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
+## Assignments
+
+**Problem Set 0: Review**
+<br>Due: Friday, 18 April 2025 by 5 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/254921/assignments/1793531).
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/000/000-questions.html) | [data](https://github.com/edrubin/EC421W25/tree/master/problem-sets/000/data-acs.csv)
+
 ## Lecture slides
 
 The slides below (linked by their topic) are .html files that will only work properly if you are connected to the internet. If you're going off grid, grab the PDFs (you'll miss out on gifs and interactive plots, but the equations will render correctly).
@@ -41,27 +47,6 @@ In case you're interested, I created the slides with [`xaringan`](https://github
 10. [Causality](https://raw.githack.com/edrubin/EC421W25/master/notes/10-causality/slides.html)<br>Introduction to causality and the Neymam-Rubin causal model. Also: Recap of in-class model-selection exercise. <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/10-causality/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/10-causality/slides.Rmd)
 
 11. [Instrumental Variables](https://raw.githack.com/edrubin/EC421W25/master/notes/11-iv/slides.html)<br>Review the Neymam-Rubin causal model; introduction to instrumental variables (IV) and two-stage least squares (2SLS). Applications to causal inference and measurement error. Venn diagrams. <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/11-iv/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/11-iv/slides.Rmd)
-
-## Assignments
-
-Tentative plan for four problem sets...
-
-**Problem Set 0: Review**
-<br>Due: TBA
-<br>Files: TBA
-
-**Problem Set 1: Heteroskedasticity, Clustering, and OLS Assumptions**
-<br>Due: TBA
-<br>Files: TBA
-
-**Problem Set 2: Time-series data, analyses, and nonstationarity**
-<br>Due: TBA
-<br>Files: TBA
-
-**Problem Set 3: Causality, IV, and general review**
-<br>Due: TBA
-<br>Files: TBA
-
 
 ## Exams
 
@@ -101,3 +86,9 @@ Here are links to previous years' course materials as well:
 
 Please also see the [syllabus](https://raw.githack.com/edrubin/EC421S25/master/syllabus/syllabus.pdf) for specific information on the homework and grade policies.
 
+## Resources
+
+- [Data Services at the UO library](https://library.uoregon.edu/data-services): includes help desk, consultations, and workshops
+- [RStudio Education](https://education.rstudio.com/): free online walkthroughs and [cheatsheets](https://posit.co/resources/cheatsheets/)
+- [swirl](https://swirlstats.com/) and [learnr](https://cran.r-project.org/web/packages/learnr/index.html): interactive R tutorials
+- [R for Data Science](https://r4ds.had.co.nz/): free online book walking you through R basics

@@ -1,6 +1,6 @@
 
 # Temporary holds: Assignments
-problem-sets*
+problem-sets/00[1-9]
 
 # Temporary holds: Lecture
 notes/0[3-9]*
@@ -16,6 +16,10 @@ midterm/exam-inclass*
 # Problem sets: Assigned
 # PS 0
 problem-sets/000/data-raw*
+problem-sets/000/clean-data*
+problem-sets/000/ed.scss
+problem-sets/000/000-questions.qmd
+problem-sets/000/000-solutions*
 # PS 1
 problem-sets/001/data-raw*
 # PS 2
