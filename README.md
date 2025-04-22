@@ -30,11 +30,11 @@ In case you're interested, I created the slides with [`xaringan`](https://github
 
 2. [Review of key math/stat/metrics topics](https://raw.githack.com/edrubin/EC421S25/master/notes/02-review/slides.html)<br>Density functions, deriving the OLS estimators, properties of estimators, statistical inference (standard errors, confidence intervals, hypothesis testing), simulation <br> [PDF](https://raw.githack.com/edrubin/EC421S25/master/notes/02-review/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421S25/blob/master/notes/02-review/slides.rmd)
 
-3. [Review of key topics from EC320](https://raw.githack.com/edrubin/EC421W25/master/notes/03-review/slides.html)<br>(the first course in our intro-to-metrics sequence) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/03-review/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/03-review/slides.rmd)
+3. [Review of key topics from EC320](https://raw.githack.com/edrubin/EC421S25/master/notes/03-review/slides.html)<br>(the first course in our intro-to-metrics sequence) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/03-review/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/03-review/slides.rmd)
 
-4. [Heteroskedasticity: Tests and implications](https://raw.githack.com/edrubin/EC421W25/master/notes/04-heteroskedasticity/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/04-heteroskedasticity/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/04-heteroskedasticity/slides.rmd)
+4. [Heteroskedasticity: Tests and implications](https://raw.githack.com/edrubin/EC421S25/master/notes/04-heteroskedasticity/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/04-heteroskedasticity/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/04-heteroskedasticity/slides.rmd)
 
-5. [Heteroskedasticity: Living with it](https://raw.githack.com/edrubin/EC421W25/master/notes/05-heteroskedasticity/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/05-heteroskedasticity/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/05-heteroskedasticity/slides.rmd)
+5. [Heteroskedasticity: Living with it](https://raw.githack.com/edrubin/EC421S25/master/notes/05-heteroskedasticity/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/05-heteroskedasticity/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/05-heteroskedasticity/slides.rmd)
 
 6. [Consistency and OLS in asymptopia](https://raw.githack.com/edrubin/EC421W25/master/notes/06-consistency/slides.html) <br> [PDF](https://raw.githack.com/edrubin/EC421W25/master/notes/06-consistency/slides.pdf) | [.Rmd](https://github.com/edrubin/EC421W25/blob/master/notes/06-consistency/slides.rmd)
 

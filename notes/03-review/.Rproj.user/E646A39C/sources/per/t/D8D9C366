@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1579017005065.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "150082816",
+    "id" : "D8D9C366",
+    "lastKnownWriteTime" : 1579020871,
+    "last_content_update" : 1579020871,
+    "path" : "~/Dropbox/UO/Teaching/EC421W20/notes/03-review/03-review.Rmd",
+    "project_path" : "03-review.Rmd",
+    "properties" : {
+        "cursorPosition" : "1500,43",
+        "scrollLine" : "1505"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

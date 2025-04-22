@@ -1,10 +1,10 @@
 
+# Temporary holds: Lecture
+notes/0[6-9]*
+notes/1*
+
 # Temporary holds: Assignments
 problem-sets/00[1-9]
-
-# Temporary holds: Lecture
-notes/0[3-9]*
-notes/1*
 
 # Notes cache
 notes/*/slides_cache/*

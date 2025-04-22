@@ -582,15 +582,15 @@ layout: true
 - Google (which inevitably leads to StackOverflow)
 - Time
 - ChatGPT, Copilot, and other AI assistants
+- [Data services at the UO library](https://library.uoregon.edu/data-services)
 - Your classmates
-- Your GEs
-- Me
-- R resources [here](http://edrub.in/ARE212/resources.html) and [here](https://www.rstudio.com/online-learning/)
+- Your GE and me
+- R resources [here](http://edrub.in/ARE212/resources.html) and [here](https://education.rstudio.com/)
+- [swirl](https://swirlstats.com/) and [learnr](https://cran.r-project.org/web/packages/learnr/index.html)
 
 ### Money
 
-- Book: [_R for Stata Users_](http://r4stats.com/books/r4stata/)
-- Short online course: [DataCamp](https://www.datacamp.com)
+Short online courses, e.g., [DataCamp](https://www.datacamp.com)
 
 ---
 
@@ -648,11 +648,3 @@ layout: false
 class: inverse, middle
 
 # Next: (More) Metrics review(s)
-
----
-exclude: true
-
-```{r, build pdfs, include = F, eval = F}
-xaringanBuilder::build_pdf('01-intro.html')
-# pagedown::chrome_print(input = "01-intro.html")
-```
