@@ -1,0 +1,559 @@
+---
+title: "Problem Set 0: Review"
+subtitle: "EC 421: Introduction to Econometrics"
+author: "Edward Rubin"
+format:
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+    theme:
+    - cosmo
+    - ed.scss
+editor:
+  render-on-save: true
+---
+
+## Instructions
+
+[**Due**]{style="text-decoration: underline;"} Upload your **PDF or HTML answers** on [Canvas](https://canvas.uoregon.edu/) *before* 5:00PM on Friday, 18 April 2025.
+
+[**Important**]{style="text-decoration: underline;"} You must **submit your answers as an HTML or PDF file**, built from an RMarkdown (`.rmd`) or Quarto (`.qmd`) file. **Do not submit the `.rmd` or `.qmd` file.** You will not receive credit for it.
+
+If we ask you to create a figure or run a regression, then the figure or the regression results should be in the document that you submit (not just the code—we want the actual figure or regression output with coefficients, standard errors, *etc.*).
+
+[**Integrity**]{style="text-decoration: underline;"} If you are suspected of cheating, then you will receive a zero—for the assignment and possibly for the course. We may report you to the dean. **Cheating includes copying from your classmates, from the internet, and from previous assignments.**
+
+[**Objective**]{style="text-decoration: underline;"} This problem set has three goals: (1) review the central econometrics topics you covered in EC320; (2) refresh (or build) your [R]{.mono} toolset; (3) start building your intuition about causality within econometrics/regression.
+
+[**README!**]{style="text-decoration: underline;"} The data in this problem set come from the 2023 [American Community Survey](https://www.census.gov/programs-surveys/acs) (ACS; downloaded from [IPUMS USA](https://usa.ipums.org/usa/)). The ACS annually surveys approximately 3.5 million households. I've provided a random subset of 10,000 individuals—all of whom are at least 18 years old. The data are stored in a CSV file named `data-acs.csv`. 
+
+The table below describes each variable in the dataset.
+
+| Variable name      | Variable description |
+|:-------------------|:---------------------|
+| `sex`  | The individual's sex (`Female` or `Male`). (`character`) |
+| `age`  | The individual's age (`18` to `99`). (`integer`) |
+| `race`  | The individual's race (6 broad categories). (`character`) |
+| `hispanic`  | Whether the individual is `Hispanic` or `Non-Hispanic`. (`character`) |
+| `educ`  | A rough estimate of the individual's years of education (`1=` first grade; `17=` graduate school). (`integer`) |
+| `empstat`  | The individual's employment status (`Employed`, `Unemployed`, `Not in labor force`). (`character`) |
+| `hrs_wk`  | The number of hours the individual works per week. (`integer`) |
+| `income`  | The individual's income in dollars. (`integer`) |
+| `deg_bachelors`  | A binary indicator for whether the individual has a bachelor's degree. (`integer`) |
+| `deg_masters`  | A binary indicator for whether the individual has a master's degree. (`integer`) |
+| `deg_profession`  | A binary indicator for whether the individual has a professional degree (e.g., law or medicine). (`integer`) |
+| `deg_phd`  | A binary indicator for whether the individual has a doctorate. (`integer`) |
+| `i_female`  | A binary indicator for whether the individual's sex is female. (`integer`) |
+| `i_black`  | A binary indicator for whether the individual is Black. (`integer`) |
+| `i_white`  | A binary indicator for whether the individual is White. (`integer`) |
+| `i_hispanic`  | A binary indicator for whether the individual is Hispanic. (`integer`) |
+| `i_workforce`  | A binary indicator for whether the individual is in the workforce (employed or unemployed). (`integer`) |
+| `i_employed`  | A binary indicator for whether the individual is employed. (`integer`) |
+
+: Variable names and descriptions
+
+## Setup 
+
+**[01]** Load your `R` packages (and install any packages that are not already installed).
+
+- You will likely want to use `tidyverse` and `here` (among others).
+- *Also:* `pacman` and its `p_load()` function make package management easier—you just use `p_load()` to load packages, and `R` will install the packages if they're not already installed. E.g., use `p_load(tidverse, here)` after you load the `pacman` package with `library(pacman)`. Remember that you will have to install `pacman` (`install.packages("pacman")`) if you have not installed it already.
+
+:::{.answer}
+[Answer]{.ans} I'm going to load five packages:
+
+- `tidyverse` (for data manipulation),
+- `scales` (for formatting numbers),
+- `patchwork` (for combining plots),
+- `fixest` (for regressions),
+- `here` (for managing file paths).
+
+```{r, answer01}
+#| include: true
+
+# Load packages using 'pacman'
+library(pacman)
+p_load(tidyverse, scales, patchwork, fixest, here)
+```
+
+:::
+
+**[02]** Now load the data (stored in `data-acs.csv`).
+
+As described above, I saved the data as a CSV, so you'll want to use a function that can read CSV files.
+
+Examples of functions that can read a CSV file:
+
+- `read_csv()` in the `readr` package, which is part of the `tidyverse`;
+- `fread()` in the `data.table` package;
+- `read.csv()`, which is available without loading any packages. 
+
+:::{.answer}
+[Answer]{.ans} I'm using `read_csv()` from the `tidyverse` package to load the data.
+
+```{r, answer02}
+#| include: true
+
+# Load data
+acs_df = here('data-acs.csv') |> read_csv()
+```
+
+:::
+
+## Get to know your data
+
+In this problem set, we are going to explore the relationship between hours worked, education, and demographics. Let's get to know the data a bit better.
+
+**[03]** How many observations (rows) are in the dataset? How many of the observations have exactly `0` hours worked per week (`hrs_wk`)?
+
+*Hints:*
+
+1. The functions `dim()` or `nrow()` show the number of rows in a dataset, *e.g.*, `nrow(some_data)`.
+1. You can use the `filter()` function (from the `tidyverse`) to filter your dataset to observations with a specific value, *e.g.*, `my_data |> filter(my_variable == 0)` would filter the dataset `my_data` to the observations for which `my_variable` is equal to `0`.
+1. You can combine hints 1 and 2 to find the number of observations with `hrs_wk == 0` by using `nrow()` on the filtered dataset, *e.g.*, `my_data |> filter(my_variable == 0) |> nrow()`.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer03}
+#| include: true
+ 
+# The number of observations in the dataset
+acs_df |> nrow() |> comma()
+# The number of observations with zero hours worked
+acs_df |> filter(hrs_wk == 0) |> nrow() |> comma()
+```
+
+We have `r acs_df |> nrow() |> comma()` observations in the dataset. Of those, `r acs_df |> filter(hrs_wk == 0) |> nrow() |> comma()` have zero hours worked per week.
+
+:::
+
+**[04]** It's good to know *which* variables are in the dataset and *what type* (`class()`) they are. How many categorical variables are in the dataset?
+
+*Hint:* You have many options here; try `glimpse()` (in the `tidyverse`), `summary()`, or `skim()` (from the `skimr` package). Also: If you used `read_csv()` or `fread()` to load the data, then just typing the name of the dataset will display the first few rows and the class of each variable.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer04}
+#| include: true
+
+# Get a 'glimpse' of the dataset
+glimpse(acs_df)
+```
+
+We have four categorical variables in the dataset: `sex`, `race`, `hispanic`, and `empstat`.
+
+:::
+
+**[05]** How many observations are missing data on hours worked (`hrs_wk`)?
+
+*Hints:*
+
+1. The function `is.na()` detects whether observations are missing.
+1. You can filter your dataset to observations missing a variable using the `filter()` function, for example, `my_data |> filter(is.na(my_variable))` would filter the dataset `my_data` to observations missing values for the variable `my_variable`.
+1. You could also sum the results of `is.na()` to see how many of them are missing. `is.na()` returns `TRUE` or `FALSE`. `TRUE` is a `1`, and `FALSE` is a `0`.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer05}
+#| include: true
+
+# Sum the TRUEs for is.na()
+acs_df$hrs_wk |> is.na() |> sum()
+```
+
+In the dataset, `r acs_df$income |> is.na() |> sum()` observations are missing income data.
+
+:::
+
+**[06]** We're also going to be interested in the variable for years of education (`educ`). How many observations are missing their values for education?
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer06}
+#| include: true
+
+# Sum the TRUEs for is.na()
+acs_df$educ |> is.na() |> sum()
+```
+
+In the dataset, `r acs_df$educ |> is.na() |> sum()` observations are missing education data.
+:::
+
+## Summarizing data
+
+Time to make a few figures. Simple summaries and visualizations are fantastic ways to get to know the data and to try to figure out any potential issues/features. In this case, they will also provide insights into the distribution of income and education in the United States (in 2023).
+
+**[07]** Before you make any figures, calculate the mean and median of the variables `hrs_wk`, `educ`, `i_female`, `age`, and `income`.
+
+*Hints:*
+
+1. If a variable is missing values, then the mean and median will be missing too. You can use the `na.rm = TRUE` argument to remove missing values from the calculation, *e.g.* `mean(my_variable, na.rm = TRUE)`.
+1. You can also use the `mean()` and `median()` functions directly. You can use the `summarise_all()` function to calculate the mean and median of all variables in a dataset—and `select()` allows you to select specific variables. 
+
+*Example:* Calculating the mean and standard deviation of `income`:
+```{r, example07}
+#| eval: false
+
+# Calculate the mean and standard deviation of 'income'
+acs_df |>
+  select() |>
+  summarise_all(list(mean = mean, stnd_dev = sd), na.rm = TRUE)
+```
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer07}
+#| include: true
+ 
+# The mean
+acs_df |>
+  select(hrs_wk, educ, i_female, age, income) |>
+  summarise_all(mean, na.rm = TRUE)
+# The median
+acs_df |>
+  select(hrs_wk, educ, i_female, age, income) |>
+  summarise_all(median, na.rm = TRUE)
+```
+
+:::
+
+**[08]** What does the mean of a (binary) indicator variable like `i_female` tell us?
+
+:::{.answer}
+[Answer]{.ans} The mean of an indicator variable tells us the percentage (or share) of observations for which that variable equals one. In our example, `r acs_df$i_female |> mean(na.rm = TRUE) |> percent(.1)` of the sample is female.
+:::
+
+**[09]** Create a histogram of the hours worked variable to visualize its distribution in the dataset.
+
+**Important:** Make sure to label your axes and title your plot.
+
+*Hints:* You have a few options for creating histograms:
+
+- `ggplot2` includes the `geom_histogram()` function;
+- `hist()` is a base `R` function that can create histograms.
+
+Note that both functions allow you to select the number of *bins* in the histogram. `ggplot2` uses either the `bins` or the `binwidth` arguments; `hist()` uses the `breaks` argument.
+
+:::{.answer}
+[Answer]{.ans} I'm going to go with `ggplot2` today.
+
+```{r, answer9, include = FALSE}
+#| include: true
+#| fig-cap: "Histogram of 2023 distribution of hours worked; orange vertical line marks the median."
+
+# Create the histogram of income
+ggplot(data = acs_df, aes(x = hrs_wk)) +
+geom_histogram(bins = 30, fill = 'slateblue', color = 'grey20') +
+scale_x_continuous('Hours worked per week', labels = comma) +
+scale_y_continuous('Number of individuals', labels = comma) +
+geom_vline(xintercept = acs_df$hrs_wk |> median(), color = 'orange') +
+ggtitle('US distribution of hours worked per week', 'Source: ACS (2023)') +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
+```
+
+:::
+
+**[10]** Now create a histogram of age.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer10, include = FALSE}
+#| include: true
+#| fig-cap: "Histogram of 2023 distribution of age; orange vertical line marks the median."
+
+# Create the histogram of income
+ggplot(data = acs_df, aes(x = age)) +
+geom_histogram(bins = 40, fill = 'slateblue', color = 'grey20') +
+scale_x_continuous('Age', labels = comma) +
+scale_y_continuous('Number of individuals', labels = comma) +
+geom_vline(xintercept = acs_df$age |> median(), color = 'orange') +
+ggtitle('Distribution of age in the 2023 ACS') +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
+```
+
+:::
+
+**[11]** Why might *age* matter for the distribution of hours worked? Briefly explain your answer.
+
+:::{.answer}
+[Answer]{.ans} At some point, most people retire—or at least cut back on their weekly hours worked. Thus, we would expect some of the zero-hours worked individuals to be older (more likely retired).
+
+:::
+
+**[12]** Repeat the hours-worked histogram from **[09]** for individuals who are between the ages of 25 and 64 (`age >= 25 & age <= 64`).
+
+*Hint:* You can use the `filter()` function to select observations that meet certain criteria, e.g., `filter(my_data, i_female == 1)` would filter the dataset `my_data` to the observations for whom `i_female` is equal to the value `1`.
+
+**Important:** Again, don't forget to label your plot's axes. A title would be good too.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer12}
+#| include: true
+#| fig-cap: "Histogram of 2023 hours worked for individuals aged 25–64; orange vertical line marks the median."
+
+ggplot(
+  data = acs_df |> filter(age >= 25, age <= 64),
+  aes(x = hrs_wk)
+) +
+geom_histogram(bins = 30, fill = 'slateblue', color = 'grey20') +
+geom_vline(
+  xintercept =
+    filter(acs_df, age >= 25 & age <= 64)$hrs_wk |>
+    median(),
+  color = 'orange'
+) +
+scale_x_continuous('Hours worked per week', labels = comma) +
+scale_y_continuous('Number of individuals', labels = comma) +
+ggtitle('US distribution of income', 'Source: ACS (2023)') +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
+```
+
+:::
+
+**[13]** Did changing the sample in **[12]** produce changes to the histogram that match your hypothesis? Explain.
+
+:::{.answer}
+[Answer]{.ans} Changing the sample substantially reduced the number of individuals who work zero hours (cutting it by more than 50%). That said, there are still a lot of people with zero hours worked.
+
+:::
+
+## Analyzing hours worked
+
+Time to start analyzing the data! What correlates with (or causes) hours worked?
+
+**[14]** Start with a simple linear regression of the relationship between hours worked and education.
+
+In other words: regress `hrs_wk` on `educ` (with an intercept).
+
+*Note:* Use the full dataset unless otherwise specified.
+
+Generate a summary of the regression (estimated intercept, coefficient, and standard errors). You have a few options here:
+
+- use the `tidy()` function from the `broom` package on the output of the `lm()` function;
+- use the `summary()` function on the output of `lm()`;
+- use `feols()` (from the `fixest` package) to estimate your regression (and possibly use `etable()` to display the results);
+- use the `modelsummary()` function from the `modelsummary` package.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer14}
+#| include: true
+
+# Estimate the simple linear regression
+est14 = feols(hrs_wk ~ educ, data = acs_df)
+est14 |> etable()
+```
+
+:::
+
+**[15]** Interpret the intercept and coefficient from the regression in **[14]**.
+
+:::{.answer}
+[Answer]{.ans} The intercept is the expected hours worked per week for someone with zero years of education. Thus, we would expect someone with zero years of education to work -0.87 hours. *Note:* We do not observe anyone in the sample with zero years of education, so we should not interpret this value too literally.
+
+It's also hard to work negative hours.
+
+The coefficient provides the estimated change in hours worked for each additional year of education. In our sample, we estimate that an additional year of education increases hours worked approximately 1.81 hours, holding all else constant.
+
+:::
+
+**[16]** Based upon the regression in **[14]**, what is the expected hours worked for someone with 13 years of education?
+
+:::{.answer}
+[Answer]{.ans} The estimated income for someone with 13 years of education is approximately `-0.87 + 1.81 * 13 = `  `-0.87 + 1.81 * 13`.
+
+:::
+
+**[17]** The regression in **[14]** included individuals that work zero hours per week. Repeat the regression in **[14]** but only include individuals that work more than zero hours per week.
+
+*Hint:* Remember your friend `filter()`.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer17}
+#| include: true
+
+# Estimate the simple linear regression for only individuals that work more than zero hours
+est17 = feols(hrs_wk ~ educ, data = acs_df |> filter(hrs_wk > 0))
+est17 |> etable()
+```
+
+:::
+
+**[18]** How did focusing on individuals that work more than zero hours per week change the regression results?
+
+:::{.answer}
+[Answer]{.ans} The intercept is now positive and _much_ larger—moving from -0.9 to 31.3.
+
+The coefficient on education is now substantially smaller—decreasing from 1.8 to 0.5.
+
+The reduction in the size of the coefficient meaningfully changes our understanding of how eduation and _hours worked_ are related.
+
+:::
+
+**[19]** *Why* did focusing on individuals that work more than zero hours per week change the regression results?
+
+:::{.answer}
+[Answer]{.ans} There are several ways to think about the changes.
+
+First, when we have a lot of zero-hour workers scattered throughout the distribution of education, we are going to get a flatter relationship between education and hours worked. This *flatness* is due to the fact that OLS is trying to fit a single line to everyone, and the zero-hour workers are pulling that line down toward zero—at each level of education.
+
+We can also think of this results as part of omitted-variable bias. We have an omitted variable (age or retirement) that (1) affects our outcome (older people likely work fewer hours—especially after retirement) and (2) is correlated with education. Thus, we have all the ingredients for omitted-variable bias. By dropping likely retirees, we are removing (some of) the omitted variable bias. 
+
+Finally, you could think about how our population has changed. The regression is asking how education affects hours worked in the whole population. But there are people for whom eduation does not affect hours worked _because they are already retired_. By changing our population to include people too young to retire, we have removed the part the population for whom education does not affect hours worked. Thus, the strength of the relationship increases.
+:::
+
+**[20]** Wait... we should have plotted the data before running any regressions. Make a scatterplot of hours worked (`y` axis) against years of education (`x` axis). What do you think? Is the graphical relationship as strong as the regression suggested?
+
+*Hint:* You can use the `geom_point()` function in `ggplot2` to create a scatterplot. You can also add a regression line using the `geom_smooth()` function.
+
+*Important:* Make sure to label your axes and title your plot.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer20}
+#| include: true
+#| fig-cap: "Scatter plot of hours worked (2023) against years of education"
+
+ggplot(
+  data = acs_df |> filter(age >= 25, age <= 64),
+  aes(x = educ, y = hrs_wk)
+) +
+geom_point(alpha = .2, size = 2.5) +
+scale_y_continuous('Hours worked per week', labels = comma) +
+scale_x_continuous('Years of education', labels = comma) +
+geom_smooth(method = 'lm', color = 'orange', se = FALSE) +
+ggtitle('Hours worked and education, age 25–64', 'Source: ACS (2023)') +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
+```
+
+We don't have as much variation in education as we might like to see. The relationship does not look super strong, but it's a bit difficult to see due to the fact that many observations overlap.
+
+:::
+
+
+## Explaining who works
+
+**[21]** Let's dig into the zero-hours-worked topic. First, create a new binary variable (`i_zero_hrs`) that is equal to `1` if the individual works zero hours per week and `0` otherwise.
+
+*Hint:* You can use the `mutate()` function to create a new variable in your dataset. For example, `my_data = my_data |> mutate(new_variable = old_variable == 0)` would add a new variable called `new_variable` that is equal to `1` if `old_variable` is equal to `0` (the new variable will equal `0` otherwise).
+
+:::{.answer}
+[Answer]{.ans} The `mutate()` function is great for this task.
+
+```{r, answer21}
+#| include: true
+
+acs_df = acs_df |> mutate(i_zero_hrs = 1 * (hrs_wk == 0))
+```
+:::
+
+**[22]** Now regress this new zero-hours indicator on the indicator for whether the individual is female (`i_female`) (and an intercept). 
+
+Provide a summary (*e.g.*, table) of the regression results.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer22}
+#| include: true
+
+# Regress zero-hours indicator on i_female
+est22 = feols(i_zero_hrs ~ i_female, data = acs_df)
+# Display the regression results
+est22 |> etable()
+```
+:::
+
+**[23]** Interpret the intercept and coefficient from the regression in **[22]**.
+
+*Hint:* Remember that a regression with a binary dependent variable can be interpreted as modeling the probability that the dependent variable is equal to one.
+
+:::{.answer}
+[Answer]{.ans} The intercept is the estimated probability that a non-female (`i_female = 0`) individual works zero hours per week. Thus, we estimate that a non-female individual has a 33.74% chance of working zero hours per week.
+
+The coefficient on `i_female` is the estimated difference between the probability a female (`i_female = 1`) works zero hours and the probability a non-female works zero hours. Accordingly, we estimate that females are 7.24% more likely to work zero hours per week than non-females.
+:::
+
+**[24]** Now regress the zero-hours indicator on (1) `i_female`, (2) `educ`, and (3) the interaction between `i_female` and `educ` (and an intercept).
+
+*Hint:* To take the interaction between two variables, you can use the `:` operator in the regression formula. For example, `lm(y ~ x1 + x2 + x1:x2)` would include the interaction between `x1` and `x2`.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer24}
+#| include: true
+
+# Regress zero-hours indicator on i_female
+est24 = feols(i_zero_hrs ~ i_female + educ + i_female:educ, data = acs_df)
+# Display the regression results
+est24 |> etable()
+```
+:::
+
+
+**[25]** Interpret the intercept and each of the coefficients from the regression in **[24]**.
+
+:::{.answer}
+[Answer]{.ans} The intercept is the estimated probability that a non-female individual with zero years of education works zero hours per week. Thus, we estimate that a non-female with zero years of education has a 76.15% chance of working zero hours per week.
+
+The coefficient on `i_female` tells us the difference in the probability of working zero hours between a female with zero years of education and a non-female with zero years of education. Thus, we estimate females with zero years of education are 34.53% more likely to work zero hours per week (relative to non-females with zero years of education).
+
+The coefficient on `educ` tells us how an additional year of education affects the probability of working zero hours __for non-females__. Thus, we estimate that an additional year of education decreases the probability of working zero hours by 3.15% for non-females.
+
+Finally, the coefficient on the interaction between `i_female` and `educ` tells us how an additional year of education differentially affects the probability of working zero hours __for females__. Thus, we estimate that an additional year of education decreases the probability of working zero hours by an extra 1.94% for females (relative to non-females).
+:::
+
+**[26]** Based on the regression in **[25]**, what is the probability that a female with 13 years of education is working zero hours per week?
+
+:::{.answer}
+[Answer]{.ans} Plugging the regression estimates into our model, we have:
+$$
+\begin{align*}
+\text{Zero-Hours}_i = & 0.7615 + 0.3453 \, \text{Female}_i - 0.0315 \, \text{Educ}_i \\ &- 0.0194 \, \text{Female}_i \times \text{Educ}_i + u_i
+\end{align*}
+$$
+
+Plugging `1` in for $\text{Female}_i$ and `13` in for $\text{Educ}_i$, we estimate that the probability of working zero hours per week (for a female with 13 years of education) is `r percent(0.7615 + 0.3453 * 1 - 0.0315 * 13 - 0.0194 * 1 * 13, .01)`.
+:::
+
+**[27]** What percent of the variation in the zero-hours indicator is explained by the regression in **[24]**?
+
+:::{.answer}
+[Answer]{.ans} The $R^2$ from the regression in **[24]** is approximately 0.0455, which means that our regression explains approximately 4.55 percent of the variation in who works zero hours.
+:::
+
+**[28]** Could *age* be causing omitted variable bias in the OLS estimates above—for example, in **[22]**? Why or why not? Explain your answer.
+
+:::{.answer}
+[Answer]{.ans} Yes, age could be causing omitted variable bias in the OLS estimates above. Age likely affects whether individuals work zero hours (back to the retirement discussion). Age also likely correlates with both the indicator for female _and_ education. Thus, age affects our outcome (zero hours worked) and is correlated with our regressors—the requirements for omitted variable bias.
+:::
+
+**[29]** What must be true for the OLS estimates in **[22]** to be unbiased?
+
+:::{.answer}
+[Answer]{.ans} For the OLS estimates in **[22]** to be unbiased, we need exogeneity to be satisfied—_i.e._, the disturbance (omitted variables that affect our outcome) does not correlate with our regressors. (We also need variation in our regressors, but that is not a problem here.)
+:::
+
+## Wrap up
+
+**[30]** What are your main takeaways/insights about hours worked, education, and demographics from this problem set and its data? Explain your answer using figures/regressions from above and any additional analyses you think are relevant.
+
+:::{.answer}
+[Answer]{.ans} Lots of options here...
+:::
+
+[**Reminder**]{style="text-decoration: underline;"} Submit your final file to Canvas as PDF or HTML only.<br>(Do not submit it as `.rmd` or `.qmd`.)
