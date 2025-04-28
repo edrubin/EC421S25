@@ -60,7 +60,7 @@ The table below describes each variable in the dataset.
 - You will likely want to use `tidyverse` and `here` (among others).
 - *Also:* `pacman` and its `p_load()` function make package management easier—you just use `p_load()` to load packages, and `R` will install the packages if they're not already installed. E.g., use `p_load(tidverse, here)` after you load the `pacman` package with `library(pacman)`. Remember that you will have to install `pacman` (`install.packages("pacman")`) if you have not installed it already.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} I'm going to load five packages:
 
 - `tidyverse` (for data manipulation),
@@ -89,7 +89,7 @@ Examples of functions that can read a CSV file:
 - `fread()` in the `data.table` package;
 - `read.csv()`, which is available without loading any packages. 
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} I'm using `read_csv()` from the `tidyverse` package to load the data.
 
 ```{r, answer02}
@@ -113,7 +113,7 @@ In this problem set, we are going to explore the relationship between hours work
 1. You can use the `filter()` function (from the `tidyverse`) to filter your dataset to observations with a specific value, *e.g.*, `my_data |> filter(my_variable == 0)` would filter the dataset `my_data` to the observations for which `my_variable` is equal to `0`.
 1. You can combine hints 1 and 2 to find the number of observations with `hrs_wk == 0` by using `nrow()` on the filtered dataset, *e.g.*, `my_data |> filter(my_variable == 0) |> nrow()`.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer03}
@@ -133,7 +133,7 @@ We have `r acs_df |> nrow() |> comma()` observations in the dataset. Of those, `
 
 *Hint:* You have many options here; try `glimpse()` (in the `tidyverse`), `summary()`, or `skim()` (from the `skimr` package). Also: If you used `read_csv()` or `fread()` to load the data, then just typing the name of the dataset will display the first few rows and the class of each variable.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer04}
@@ -155,7 +155,7 @@ We have four categorical variables in the dataset: `sex`, `race`, `hispanic`, an
 1. You can filter your dataset to observations missing a variable using the `filter()` function, for example, `my_data |> filter(is.na(my_variable))` would filter the dataset `my_data` to observations missing values for the variable `my_variable`.
 1. You could also sum the results of `is.na()` to see how many of them are missing. `is.na()` returns `TRUE` or `FALSE`. `TRUE` is a `1`, and `FALSE` is a `0`.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer05}
@@ -171,7 +171,7 @@ In the dataset, `r acs_df$income |> is.na() |> sum()` observations are missing i
 
 **[06]** We're also going to be interested in the variable for years of education (`educ`). How many observations are missing their values for education?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer06}
@@ -205,7 +205,7 @@ acs_df |>
   summarise_all(list(mean = mean, stnd_dev = sd), na.rm = TRUE)
 ```
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer07}
@@ -225,7 +225,7 @@ acs_df |>
 
 **[08]** What does the mean of a (binary) indicator variable like `i_female` tell us?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The mean of an indicator variable tells us the percentage (or share) of observations for which that variable equals one. In our example, `r acs_df$i_female |> mean(na.rm = TRUE) |> percent(.1)` of the sample is female.
 :::
 
@@ -240,7 +240,7 @@ acs_df |>
 
 Note that both functions allow you to select the number of *bins* in the histogram. `ggplot2` uses either the `bins` or the `binwidth` arguments; `hist()` uses the `breaks` argument.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} I'm going to go with `ggplot2` today.
 
 ```{r, answer9, include = FALSE}
@@ -261,7 +261,7 @@ theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
 
 **[10]** Now create a histogram of age.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer10, include = FALSE}
@@ -282,7 +282,7 @@ theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
 
 **[11]** Why might *age* matter for the distribution of hours worked? Briefly explain your answer.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} At some point, most people retire—or at least cut back on their weekly hours worked. Thus, we would expect some of the zero-hours worked individuals to be older (more likely retired).
 
 :::
@@ -293,7 +293,7 @@ theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
 
 **Important:** Again, don't forget to label your plot's axes. A title would be good too.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer12}
@@ -321,7 +321,7 @@ theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed')
 
 **[13]** Did changing the sample in **[12]** produce changes to the histogram that match your hypothesis? Explain.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} Changing the sample substantially reduced the number of individuals who work zero hours (cutting it by more than 50%). That said, there are still a lot of people with zero hours worked.
 
 :::
@@ -343,7 +343,7 @@ Generate a summary of the regression (estimated intercept, coefficient, and stan
 - use `feols()` (from the `fixest` package) to estimate your regression (and possibly use `etable()` to display the results);
 - use the `modelsummary()` function from the `modelsummary` package.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer14}
@@ -358,7 +358,7 @@ est14 |> etable()
 
 **[15]** Interpret the intercept and coefficient from the regression in **[14]**.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The intercept is the expected hours worked per week for someone with zero years of education. Thus, we would expect someone with zero years of education to work -0.87 hours. *Note:* We do not observe anyone in the sample with zero years of education, so we should not interpret this value too literally.
 
 It's also hard to work negative hours.
@@ -369,7 +369,7 @@ The coefficient provides the estimated change in hours worked for each additiona
 
 **[16]** Based upon the regression in **[14]**, what is the expected hours worked for someone with 13 years of education?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The estimated income for someone with 13 years of education is approximately `-0.87 + 1.81 * 13 = `  `-0.87 + 1.81 * 13`.
 
 :::
@@ -378,7 +378,7 @@ The coefficient provides the estimated change in hours worked for each additiona
 
 *Hint:* Remember your friend `filter()`.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer17}
@@ -393,7 +393,7 @@ est17 |> etable()
 
 **[18]** How did focusing on individuals that work more than zero hours per week change the regression results?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The intercept is now positive and _much_ larger—moving from -0.9 to 31.3.
 
 The coefficient on education is now substantially smaller—decreasing from 1.8 to 0.5.
@@ -404,7 +404,7 @@ The reduction in the size of the coefficient meaningfully changes our understand
 
 **[19]** *Why* did focusing on individuals that work more than zero hours per week change the regression results?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} There are several ways to think about the changes.
 
 First, when we have a lot of zero-hour workers scattered throughout the distribution of education, we are going to get a flatter relationship between education and hours worked. This *flatness* is due to the fact that OLS is trying to fit a single line to everyone, and the zero-hour workers are pulling that line down toward zero—at each level of education.
@@ -420,7 +420,7 @@ Finally, you could think about how our population has changed. The regression is
 
 *Important:* Make sure to label your axes and title your plot.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer20}
@@ -450,7 +450,7 @@ We don't have as much variation in education as we might like to see. The relati
 
 *Hint:* You can use the `mutate()` function to create a new variable in your dataset. For example, `my_data = my_data |> mutate(new_variable = old_variable == 0)` would add a new variable called `new_variable` that is equal to `1` if `old_variable` is equal to `0` (the new variable will equal `0` otherwise).
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The `mutate()` function is great for this task.
 
 ```{r, answer21}
@@ -464,7 +464,7 @@ acs_df = acs_df |> mutate(i_zero_hrs = 1 * (hrs_wk == 0))
 
 Provide a summary (*e.g.*, table) of the regression results.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer22}
@@ -481,7 +481,7 @@ est22 |> etable()
 
 *Hint:* Remember that a regression with a binary dependent variable can be interpreted as modeling the probability that the dependent variable is equal to one.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The intercept is the estimated probability that a non-female (`i_female = 0`) individual works zero hours per week. Thus, we estimate that a non-female individual has a 33.74% chance of working zero hours per week.
 
 The coefficient on `i_female` is the estimated difference between the probability a female (`i_female = 1`) works zero hours and the probability a non-female works zero hours. Accordingly, we estimate that females are 7.24% more likely to work zero hours per week than non-females.
@@ -491,7 +491,7 @@ The coefficient on `i_female` is the estimated difference between the probabilit
 
 *Hint:* To take the interaction between two variables, you can use the `:` operator in the regression formula. For example, `lm(y ~ x1 + x2 + x1:x2)` would include the interaction between `x1` and `x2`.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans}
 
 ```{r, answer24}
@@ -507,7 +507,7 @@ est24 |> etable()
 
 **[25]** Interpret the intercept and each of the coefficients from the regression in **[24]**.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The intercept is the estimated probability that a non-female individual with zero years of education works zero hours per week. Thus, we estimate that a non-female with zero years of education has a 76.15% chance of working zero hours per week.
 
 The coefficient on `i_female` tells us the difference in the probability of working zero hours between a female with zero years of education and a non-female with zero years of education. Thus, we estimate females with zero years of education are 34.53% more likely to work zero hours per week (relative to non-females with zero years of education).
@@ -519,7 +519,7 @@ Finally, the coefficient on the interaction between `i_female` and `educ` tells 
 
 **[26]** Based on the regression in **[25]**, what is the probability that a female with 13 years of education is working zero hours per week?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} Plugging the regression estimates into our model, we have:
 $$
 \begin{align*}
@@ -532,19 +532,19 @@ Plugging `1` in for $\text{Female}_i$ and `13` in for $\text{Educ}_i$, we estima
 
 **[27]** What percent of the variation in the zero-hours indicator is explained by the regression in **[24]**?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} The $R^2$ from the regression in **[24]** is approximately 0.0455, which means that our regression explains approximately 4.55 percent of the variation in who works zero hours.
 :::
 
 **[28]** Could *age* be causing omitted variable bias in the OLS estimates above—for example, in **[22]**? Why or why not? Explain your answer.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} Yes, age could be causing omitted variable bias in the OLS estimates above. Age likely affects whether individuals work zero hours (back to the retirement discussion). Age also likely correlates with both the indicator for female _and_ education. Thus, age affects our outcome (zero hours worked) and is correlated with our regressors—the requirements for omitted variable bias.
 :::
 
 **[29]** What must be true for the OLS estimates in **[22]** to be unbiased?
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} For the OLS estimates in **[22]** to be unbiased, we need exogeneity to be satisfied—_i.e._, the disturbance (omitted variables that affect our outcome) does not correlate with our regressors. (We also need variation in our regressors, but that is not a problem here.)
 :::
 
@@ -552,7 +552,7 @@ Plugging `1` in for $\text{Female}_i$ and `13` in for $\text{Educ}_i$, we estima
 
 **[30]** What are your main takeaways/insights about hours worked, education, and demographics from this problem set and its data? Explain your answer using figures/regressions from above and any additional analyses you think are relevant.
 
-:::{style="display: none;"}
+:::{.answer}
 [Answer]{.ans} Lots of options here...
 :::
 

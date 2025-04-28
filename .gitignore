@@ -15,6 +15,7 @@ midterm/exam-inclass*
 
 # Problem sets: Assigned
 # PS 0
+problem-sets/000/000-questions.qmd
 problem-sets/000/data-raw*
 problem-sets/000/clean-data*
 problem-sets/000/ed.scss
