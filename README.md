@@ -14,11 +14,13 @@ __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
 ## Midterm
 
-[List of topics](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/topics/midterm-topics.html)
-<br>
-[Practice problems](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/review/midterm-review.html)
-<br>
-[Prior exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams)
+Helpful materials for the in-class midterm exam (May 6th):
+
+- [past exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams);
+- [list of topics to know](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/topics/midterm-topics.html);
+- [practice problems](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/review/midterm-review.html) (no solutions)
+
+The problem sets should also help you review.
 
 ## Assignments
 
