@@ -18,6 +18,11 @@ __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 <br>Due: Friday, 18 April 2025 by 5 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/254921/assignments/1793531).
 <br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/000/000-questions.html) | [data](https://github.com/edrubin/EC421W25/tree/master/problem-sets/000/data-acs.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/000/000-solutions.html)
 
+
+**Problem Set 1: **
+<br>Due: Friday, 02 May 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/261057/assignments/1857218).
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-questions.html) | [data](https://github.com/edrubin/EC421W25/tree/master/problem-sets/001/vote-data.csv) 
+
 ## Lecture slides
 
 The slides below (linked by their topic) are .html files that will only work properly if you are connected to the internet. If you're going off grid, grab the PDFs (you'll miss out on gifs and interactive plots, but the equations will render correctly).
