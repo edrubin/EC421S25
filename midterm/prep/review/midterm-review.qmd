@@ -73,21 +73,17 @@ Suppose we omitted the variable $\text{Ability}$. Will our estimate $\hat{\beta}
 
 20\. Does omitted-variable bias cause OLS to be inconsistent?
 
-21\. How does a mis-measured explanatory variable affect OLS's estimates for the coefficients?
+21\. What do we mean by *causality*?
 
-22\. Does measurement error in the outcome variable matter? Explain.
+22\. Why is causality important? Are there instances where correlation is also important/interesting?
 
-23\. What do we mean by *causality*?
+23\. What do we mean by *prediction*? Does causality matter for prediction? (Explain.)
 
-24\. Why is causality important? Are there instances where correlation is also important/interesting?
+24\. What happens to OLS when the disturbances are correlatd with the explanatory variables?
 
-25\. What do we mean by *prediction*? Does causality matter for prediction? (Explain.)
+25\. What happens to OLS when the disturbances are not independent of each other?
 
-26\. What happens to OLS when the disturbances are correlatd with the explanatory variables?
-
-27\. What happens to OLS when the disturbances are not independent of each other?
-
-28\. Write down the model that each of the lines of `R` code estimates. How would you interpret the coefficients in each model?
+26\. Write down the model that each of the lines of `R` code estimates. How would you interpret the coefficients in each model?
 
 - `lm(y ~ x1 + x2)`
 - `lm(y ~ x1 + x2 + x1:x2)`

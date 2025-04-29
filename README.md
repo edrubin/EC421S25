@@ -12,6 +12,14 @@ __Edward Rubin:__ Tuesdays: 1:30p–3:00p ([PLC 530](https://map.uoregon.edu/b83
 
 __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
+## Midterm
+
+[List of topics](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/topics/midterm-topics.html)
+<br>
+[Practice problems](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/review/midterm-review.html)
+<br>
+[Prior exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams)
+
 ## Assignments
 
 **Problem Set 0: Review**

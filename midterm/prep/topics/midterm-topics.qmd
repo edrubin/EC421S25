@@ -89,5 +89,3 @@ format:
   - Probability limits
 - Consistency
 - Signing the bias from omitted variables.
-- Measurement error and attenuation bias: What are they?
-- Examples of measurement error
