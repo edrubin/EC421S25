@@ -10,8 +10,8 @@ problem-sets/00[2-9]
 notes/*/slides_cache/*
 
 # Non-review test files
-final/exam-inclass*
-midterm/exam-inclass*
+final/exam*
+midterm/exam/*
 
 # Problem sets: Assigned
 # PS 0
