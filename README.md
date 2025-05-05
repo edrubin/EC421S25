@@ -16,7 +16,7 @@ __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
 Helpful materials for the in-class midterm exam (May 6th):
 
-- [notes from in-class review](https://github.com/edrubin/EC421S25/midterm/prep/inclass-review.pdf)
+- [notes from in-class review](https://github.com/edrubin/EC421S25/blob/master/midterm/prep/inclass-review.pdf)
 - [past exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams);
 - [list of topics to know](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/topics/midterm-topics.html);
 - [practice problems](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/review/midterm-review.html) (no solutions)
