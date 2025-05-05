@@ -1,0 +1,532 @@
+---
+title: "Problem Set 1: Heteroskedasticity, Clustering, and OLS Assumptions"
+subtitle: "EC 421: Introduction to Econometrics"
+author: "Edward Rubin"
+format:
+  html:
+    out-width: "90%"
+    fig-height: 7
+    fig-width: 9
+    fig-format: png
+    fig-dpi: 150
+    toc: true
+    number-sections: true
+    self-contained: true
+    theme:
+    - cosmo
+    - ed.scss
+editor:
+  render-on-save: true
+---
+
+```{r, setup, include = FALSE}
+# Load magrittr
+library(magrittr)
+# Knitr options
+knitr::opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  warning = FALSE,
+  message = FALSE
+)
+knitr::opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(digits = 4)
+options(width = 90)
+```
+
+## Instructions
+
+[**Due**]{style="text-decoration: underline;"} Upload your answer on [Canvas](https://canvas.uoregon.edu/) *before* midnight on Friday, 02 May 2025.
+
+[**Important**]{style="text-decoration: underline;"} You must submit your answers as an HTML or PDF file, built from an RMarkdown (`.rmd`) or Quarto (`.qmd`) file. **Do not submit the `.rmd` or `.qmd` file.** You will not receive credit for it. The submitted file should include your `R` code, your responses, and the relevant figures/regression results.
+
+If we ask you to create a figure or run a regression, then the figure or the regression results should be in the document that you submit (not just the code—we want the actual figure or regression output with coefficients, standard errors, *etc.*).
+
+[**Integrity**]{style="text-decoration: underline;"} If you are suspected of cheating, then you will receive a zero—for the assignment and possibly for the course. We may report you to the dean. **Cheating includes copying from your classmates, from the internet, and from previous assignments.**
+
+[**README!**]{style="text-decoration: underline;"} The data in this problem set come from [Tony McGovern's archive of presidential election results](https://github.com/tonmcg/US_County_Level_Election_Results_08-24) for the 2016, 2020, and 2024 presidential elections.
+
+The table below describes each variable in the dataset.
+
+| Variable name      | Variable description |
+|:-------------------|:---------------------|
+| `state_name` | The state's name for the given county. (`character`) |
+| `state` | The 2-digit alphabetical abbreviation for the county's state. (`character`) |
+| `county_name` | The county's name. (`character`) |
+| `county_fips` | The [county FIPS code](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt) for the individual's county of residence (5-digit numeric code). (`character`) |
+| `confederate` | Binary indicator for whether the county is in a state that was part of the Confederacy during the Civil War. (`integer`: `0` or `1`) |
+| `votes_gop_2016` | The number of votes cast for the Republican candidate in the 2016 presidential election. (`integer`) |
+| `votes_dnc_2016` | The number of votes cast for the Democratic candidate in the 2016 presidential election. (`integer`) |
+| `votes_gop_2020` | The number of votes cast for the Republican candidate in the 2020 presidential election. (`integer`) |
+| `votes_dnc_2020` | The number of votes cast for the Democratic candidate in the 2020 presidential election. (`integer`) |
+| `votes_gop_2024` | The number of votes cast for the Republican candidate in the 2024 presidential election. (`integer`) |
+| `votes_dnc_2024` | The number of votes cast for the Democratic candidate in the 2024 presidential election. (`integer`) |
+
+: Variable names and descriptions
+
+[**Objective**]{style="text-decoration: underline;"} This problem set has three purposes: (1) reinforce the metrics topics we introduced (esp. heteroskedasticity, clustering, and violations of OLS's assumptions) in class; (2) build your [R]{.mono} toolset; (3) start building your intuition about causality within econometrics/regression.
+
+## Setup 
+
+**[01]** Load your `R` packages. You will probably want `tidyverse`, `here`, and `fixest` (among others). 
+
+*Reminder:* `pacman` and it's `p_load()` function make package management easier—you just use `p_load()` to load packages, and `R` will install the packages if they're not already installed.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer01}
+#| include: true
+
+# Load packages using 'pacman'
+library(pacman)
+p_load(tidyverse, patchwork, fixest, here)
+
+```
+
+:::
+
+**[02]** Now load the data (stored in `vote-data.csv`).
+
+I saved the data as a CSV, so you'll want to use a function that can read CSV files—for example, `read_csv()` in the `readr` package, which is part of the `tidyverse`.
+
+*Hint:* If the first problem set did not go well, check out our solutions! In addition to showing you how we solved the last problem set, our answers will help you with the various steps of this problem set.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer02}
+#| include: true
+
+# Load data
+vote_df = here('vote-data.csv') %>% read_csv()
+
+```
+
+:::
+
+**[03]** Get to know the dataset. Try the `skim()` function from the `skimr` package to get a summary of the dataset and to answer the following questions:
+
+- How many observations are in the dataset?
+- How many numeric variables are there?
+- How many observations are missing values?
+- How many unique counties are in the dataset?
+  
+::: {.answer}
+[Answer]{.ans} As suggested, I'm using the `skim()` function to get a summary of the dataset.
+
+```{r, answer03}
+#| include: true
+
+# Load skimr
+p_load(skimr)
+# Summarize the dataset
+vote_df %>% skim()
+```
+
+- There are 3,103 observations.
+- There are 7 of the 11 variables are numeric.
+- There are 0 missing values.
+- There are 3,103 unique counties in the dataset (same as the number of observations).
+:::
+
+## Visualize the data
+
+Throughout the problem set, we're going to investigate how the 2016 and 2020 election results may help explain the 2024 election results. We will start by visualizing the data.
+
+**[04]** Create a histogram of the number of votes cast for the Republican candidate in the 2024 presidential election (`votes_gop_2024`).
+
+:::{.answer}
+[Answer]{.ans}
+```{r, answer04}
+#| include: true
+
+# Create the histogram
+ggplot(vote_df, aes(x = votes_gop_2024)) +
+geom_histogram(color = 'salmon3', fill = 'salmon1', bins = 50) +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed') +
+scale_x_continuous('2024 GOP votes', labels = scales::comma) +
+scale_y_continuous('Count', labels = scales::comma)
+```
+:::
+
+**[05]** What do you notice about the distribution of votes in the previous histogram? *Why* is the distribution so skewed?
+
+:::{.answer}
+[Answer]{.ans} The distribution of votes is highly right-skewed. There are a few counties with very large numbers of votes, but most counties have relatively small numbers of votes. This skew is likely occuring because there are a small number of very populous counties (e.g., Los Angeles County) that have a large number of votes.
+:::
+
+**[06]** Repeat the histogram from **[04]** but use a log-10 scale on the x-axis.
+
+*Hint:* You can tell `ggplot()` to use log base-10 scaling on the x-axis by using [`scale_x_log10()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html). (You could also use the `log10()` function to create a new variable, but I like the first option more.)
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer06}
+#| include: true
+
+# Create the plot
+ggplot(vote_df, aes(x = votes_gop_2024)) +
+geom_histogram(color = 'salmon3', fill = 'salmon1', bins = 50) +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed') +
+scale_x_log10('2024 GOP votes (log-10 scale)', labels = scales::comma) +
+scale_y_continuous('Count', labels = scales::comma)
+```
+
+:::
+
+**[07]** Did the log-10 transformation help visualize the distribution of votes? Did it provide any new insights?
+
+:::{.answer}
+[Answer]{.ans} First, the log-10 transformation made the distribution more symmetric and a bit easier to see. That said, if one isn't used to thinking in "log-10", then the transformation may not be very helpful.
+
+:::
+
+**[08]** We're actually interested in the share of votes won by the candidates—not just the total number of votes. Create three new variables:
+
+- `share_gop_2016`: the share of votes cast for the Republican candidate in the 2016 presidential election;
+- `share_gop_2020`: the share of votes cast for the Republican candidate in the 2020 presidential election;
+- `share_gop_2024`: the share of votes cast for the Republican candidate in the 2024 presidential election.
+  
+*Hints:*
+
+1. You can use the `mutate()` function from the `dplyr` package to create new variables.
+2. The GOP share of votes is the number of votes for the GOP candidate divided by the total number of votes cast for both candidates (here: votes for GOP plus votes for DNC).
+
+:::{.answer}
+[Answer]{.ans} We can create the new variables using the `mutate()` function from the `dplyr` package.
+```{r, answer08}
+#| include: true
+
+# Create the new variables
+vote_df =
+  vote_df |>
+    mutate(
+      share_gop_2016 = votes_gop_2016 / (votes_gop_2016 + votes_dnc_2016),
+      share_gop_2020 = votes_gop_2020 / (votes_gop_2020 + votes_dnc_2020),
+      share_gop_2024 = votes_gop_2024 / (votes_gop_2024 + votes_dnc_2024)
+    )
+```
+:::
+
+:::{.answer}
+[Answer]{.ans} We use log-10 income to compress the distribution. Beacuse the distribution of income is highly skewed, the log transformation makes the distribution more symmetric and more easily visualized.
+
+:::
+
+**[09]** Plot the histogram of the share of votes cast for the Republican candidate in the 2024 presidential election (`share_gop_2024`).
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer09}
+#| include: true
+
+# Create the plot
+ggplot(vote_df, aes(x = share_gop_2024)) +
+geom_histogram(color = 'salmon3', fill = 'salmon1', bins = 50) +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed') +
+scale_x_continuous('2024 GOP votes (log-10 scale)', labels = scales::percent) +
+scale_y_continuous('Count', labels = scales::comma)
+```
+
+:::
+
+**[10]** Why is this histogram also so skewed? What are we missing?
+
+:::{.answer}
+[Answer]{.ans} The histogram is missing *population*: each observation is a county, but counties can have *very* different populations.
+
+:::
+
+**[11]** Create a scatterplot of the share of votes cast for the Republican candidate in the 2024 presidential election (`share_gop_2024`) against the share of votes cast for the Republican candidate in the 2020 presidential election (`share_gop_2020`). Does the scatterplot suggest that the share of votes cast for the Republican candidate in 2024 is correlated with the share of votes cast for the Republican candidate in 2020?
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer11}
+#| include: true
+
+# Create the scatterplot
+ggplot(vote_df, aes(x = share_gop_2020, y = share_gop_2024)) +
+geom_point(color = 'salmon3', size = 0.5) +
+theme_minimal(base_size = 12, base_family = 'Fira Sans Condensed') +
+scale_x_continuous('2020 GOP votes', labels = scales::percent) +
+scale_y_continuous('2024 GOP votes', labels = scales::percent)
+```
+:::
+
+## Heteroskedasticity
+
+**[12]** From the scatterplot in **[11]**, do you think the following regression model would have a heteroskedastic disturbance? Explain your answer.
+
+$$
+  \text{(GOP share 2024)}_i = \beta_0 + \beta_1 \text{(GOP share 2020)}_i + u_i
+$$
+
+:::{.answer}
+[Answer]{.ans} The scatterplot does seem suggestive of a heteroskedastic disturbance: the variance of the residual seems larger in counties with 2020 GOP shares around 50%—relative to counties with very high GOP shares in 2020.
+:::
+
+**[13]** Estimate the model from **[12]**. Report the results and interpret both the intercept and coefficient.
+
+:::{.answer}
+[Answer]{.ans} The requested regresion...
+```{r, answer13}
+#| include: true
+
+# Estimate the model
+reg13 = feols(share_gop_2024 ~ share_gop_2020, data = vote_df)
+# The results
+summary(reg13)
+```
+
+The estimated intercept (0.03877) suggests that we expect 3.9% GOP vote-share in 2024 for counties that had 0% GOP support in 2020.
+
+The estimated coefficient (0.96715) implies that for every 1% increase in GOP vote-share in 2020, we expect a 0.97% increase in GOP vote-share in 2024.
+
+:::
+
+**[14]** Now plot a scatterplot (using `geom_point()`) of the residuals from **[13]** against the regression's explanatory variable (`share_gop_2020`). Does the scatterplot suggest that the model has a heteroskedastic disturbance? Explain your answer.
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer14}
+#| include: true
+
+# Add residuals to the dataset
+vote_df$e13 = residuals(reg13)
+# Plot
+ggplot(vote_df, aes(x = share_gop_2020, y = e13)) +
+geom_point() +
+scale_x_continuous('2020 GOP vote share') +
+theme_minimal(base_size = 10, base_family = 'Fira Sans Condensed')
+```
+
+The scatterplot suggests the disturbance may not be homoskedastic. Residuals for counties with lower 2020 GOP vote shares seem to have substantially more variance that counties with higher 2020 GOP vote shares.
+
+:::
+
+**[15]** While certainly helpful, we don't need to rely on scatterplots to detect heteroskedasticity. We have formal tests! Use the Goldfeld-Quandt test to test for heteroskedasticity in the previous regression model. Put 1,034 observations in the first group and 1,034 observations in the second group.
+
+Make sure to report the *p*-value and your conclusion.
+
+*Hint:* The course notes walk you through this test—as do the videos from lab.
+
+*Note:* I want you to do the test manually (do not use the `gqtest()` function from the `lmtest` package).
+
+:::{.answer}
+[Answer]{.ans}
+
+```{r, answer15}
+#| include: true
+
+# Order the data by the explanatory variable
+vote_df = arrange(vote_df, share_gop_2020)
+# Regression for the first group
+reg15a = feols(
+  share_gop_2024 ~ share_gop_2020,
+  data = vote_df |> head(1034)
+)
+# Regression for the second group
+reg15b = feols(
+  share_gop_2024 ~ share_gop_2020,
+  data = vote_df |> tail(1034)
+)
+# Calculate SSE for each group
+sse_a = sum(residuals(reg15a)^2)
+sse_b = sum(residuals(reg15b)^2)
+# Calculate the p-value
+pf(
+  sse_a / sse_b,
+  df1 = 1034 - 2,
+  df2 = 1034 - 2,
+  lower.tail = FALSE
+)
+```
+
+The p-value (1.473 $\times 10^{-90}$) is *very* small, so we reject the null hypothesis of homoskedasticity. We conclude that there is statistically significant evidence (at the 5% level or whatever level you want) that the model has a heteroskedastic disturbance.
+
+:::
+
+**[16]** How would the White test work in this case? What regressions would you need to run? Don't run them—just explain.
+
+:::{.answer}
+[Answer]{.ans} The White test would use the squared residuals from the regression model in **[13]**. Specifically, the White test would regress these squared residuals from **[13]** on the explanatory variable (`share_gop_2020`) and its square. We would then conduct a joint test of the coefficients using an LM test.
+:::
+
+**[17]** Why do we typically prefer the White test over the Goldfeld-Quandt test?
+
+:::{.answer}
+[Answer]{.ans} The White test is more general than the Goldfeld-Quandt test. The Goldfeld-Quandt test focuses on a specific type of heteroskedasticity: when the variance of the disturbance is increasing or decreasing with one of our explanatory variables. The White test does not assume a specific form of heteroskedasticity, so it is more flexible and can be used in a wider variety of situations.
+:::
+
+**[18]** One approach to "fixing" heteroskedasticity is to check your specification. Let's integrate a new variable into our model. Some political commentators have suggested that historical race-related factors may be important in explaining the 2024 election results. For example, the counties that were part of the Confederacy during the Civil War may have different voting patterns than counties that were not part of the Confederacy. Let's test this hypothesis.
+
+Estimate a model that includes the Confederacy indicator (`confederate`) as an additional explanatory variable **and** the interaction between the Confederacy indicator and the 2020 GOP vote share. The model should look like this:
+$$
+\begin{align*}
+  \text{(GOP share 2024)}_i = &\beta_0 + \beta_1 \text{(GOP share 2020)}_i + \beta_2 \mathbb{I}(\text{Confederate})_i \\ &+ \beta_3 (\text{GOP share 2020})_i \times \mathbb{I}(\text{Confederate})_i + u_i
+\end{align*}
+$$
+where $\mathbb{I}(\text{Confederate})_i$ is an indicator for whether the county was part of the Confederacy during the Civil War.
+
+Report your results.
+
+:::{.answer}
+[Answer]{.ans}
+```{r, answer18}
+#| include: true
+
+# Estimate the model
+reg18 = feols(
+  share_gop_2024 ~
+    share_gop_2020 + confederate +
+    share_gop_2020 : confederate,
+  data = vote_df
+)
+# The results
+summary(reg18)
+```
+:::
+
+**[19]** What does the coefficient on the interaction term suggest? Does it support the hypothesis that the counties that were part of the Confederacy during the Civil War have different voting patterns than counties that were not part of the Confederacy?
+
+:::{.answer}
+[Answer]{.ans} The coefficient on the interaction term (0.009567) suggests that the effect of the 2020 GOP vote share on the 2024 GOP vote share is larger in counties that were part of the Confederacy during the Civil War.
+:::
+
+**[20]** Plot the residuals from the regression in **[18]** against the explanatory variable (`share_gop_2020`). Does the scatterplot suggest that we "fixed" the heteroskedasticity issue? Explain your answer.
+
+:::{.answer}
+[Answer]{.ans}
+```{r, answer20}
+#| include: true
+#| fig-cap: "Comparing residuals from the regression in 18 (black) to the residuals from the regression in 13 (grey)."
+
+# Add residuals to the dataset
+vote_df$e18 = residuals(reg18)
+# Plot
+ggplot(vote_df, aes(x = share_gop_2020)) +
+geom_point(aes(y = e13), color = 'grey80') +
+geom_point(aes(y = e18), color = 'black') +
+scale_x_continuous('2020 GOP vote share') +
+theme_minimal(base_size = 10, base_family = 'Fira Sans Condensed')
+```
+
+While updating our specification appears to shrink the residuals (a good thing), it does not appear to have fixed our heteroskedasticity issue. The residuals are still heteroskedastic: the variance of the residuals is larger for counties with lower 2020 GOP vote shares.
+:::
+
+**[21]** The "standard" approach to dealing with heteroskedasticity is to use heteroskedasticity-robust standard errors. Estimate the model from **[18]** again, but this time use heteroskedasticity-robust standard errors.
+
+*Hints:*
+
+- You can set `vcov = 'het'` inside of `feols()` to get heteroskedasticity-robust standard errors. For example, `feols(y ~ x, data = data, vcov = 'het')`.
+- Alternatively, you can use the `summary()` function on an object estimated by `feols()` and set `vcov = 'het'` inside of `summary()`. For example, `summary(feols(y ~ x, data = data), vcov = 'het')`.
+
+:::{.answer}
+[Answer]{.ans}
+```{r, answer21}
+#| include: true
+
+# Het-robust SEs
+reg18 |> summary(vcov = 'het')
+```
+:::
+
+**[22]** Compare the heteroskedasticity-robust standard errors to the standard errors from **[18]**. Are they meaningfully different? Explain.
+
+:::{.answer}
+[Answer]{.ans} The heteroskedasticity-robust standard errors are about 30–40% larger than the standard errors from **[18]**. This change moves the p-value on the interaction between GOP-vote-share and Confederacy from .005 to .03, which is a meaningful change.
+:::
+
+**[23]** Why are the coefficients in **[18]** and **[21]** the same?
+
+:::{.answer}
+[Answer]{.ans} The coefficients are the same because the estimator **for the coefficients** is the same. We're only changing the approach for estimating the standard errors.
+:::
+
+**[24]** Our third approach for dealing with heteroskedasticity is to upweight the "noisy" observations and downweight the "less noisy" observations—*i.e.*, to use weighted least squares (WLS).
+
+Explain why weighting by the total number of votes cast in the 2024 presidential election (`votes_gop_2024 + votes_dnc_2024`) *could* be a reasonable approach to WLS in this case.
+
+*Hint:* Check the notes when we walk through an example of WLS.
+
+:::{.answer}
+[Answer]{.ans} The total number of votes cast in the 2024 presidential election is a measure of the size of the county. Larger counties are likely less noisy, so it could be reasonable to upweight them and downweight smaller counties. This is similar to the example in the notes where we used WLS to upweight larger schools and downweight smaller schools.
+:::
+
+**[25]** Create a variable for the total votes cast in the 2024 presidential election (`votes_gop_2024 + votes_dnc_2024`).
+
+Now estimate the model from **[18]** again, but this time use WLS with weights equal to the total number of votes cast in the 2024 presidential election (this new variable).
+
+Remember, you can use the `weights` argument in `feols()` to specify the weights. For example, `feols(y ~ x, data = data, weights = ~w)`, where `w` is the name of the variable that contains the weights. Notice that the `weights` argument must be preceded by a `~` (tilde).
+
+:::{.answer}
+[Answer]{.ans}
+```{r, answer25}
+#| include: true
+
+# Create the variable
+vote_df = vote_df |>
+  mutate(votes_2024 = votes_gop_2024 + votes_dnc_2024)
+# Estimate the model
+reg25 = feols(
+  share_gop_2024 ~
+    share_gop_2020 + confederate +
+    share_gop_2020 : confederate,
+  data = vote_df,
+  weights = ~votes_2024
+)
+# The results
+summary(reg25)
+```
+:::
+
+**[26]** Compare the WLS standard errors to the heteroskedasticity-robust standard errors from **[21]**. Are they meaningfully different? Explain.
+
+:::{.answer}
+[Answer]{.ans} The WLS standard errors on the interaction are quite similar to the heteroskedasticity-robust standard errors. However, the WLS coefficient on the interaction is larger than the OLS-based estimate, which generates a much larger test statistic and a much smaller p-value.
+:::
+
+## Clustering
+
+**[27]** In class we discussed the idea of correlated disturbances (a.k.a clustered disturbances). In the context of this dataset, why might the disturbances be correlated across observations (counties)?
+
+:::{.answer}
+[Answer]{.ans} The disturbances may be correlated across counties because the counties are geographically close to each other. Candidates campaign in areas with ads, events, and other activities—all of which can affect the local voters across county lines. Similarly, employment shocks can affect multiple counties at the same time—and may also affect political preferences.
+:::
+
+**[28]** Update the regression from **[18]** using cluster-robust standard errors. Cluster by state (*i.e.*, using the `state` variable).
+
+Remember, you can
+
+- use the `cluster` option in `feols()`, *e.g.*, `feols(y ~ x, data, cluster = ~ state)`;
+- use the `cluster` option in `summary()`, *e.g.*, `summary(feols(y ~ x, data), cluster = ~ state)`.
+  
+:::{.answer}
+[Answer]{.ans}
+```{r, answer28}
+#| include: true
+
+# Update the standard errors
+reg18 |> summary(cluster = ~ state)
+```
+:::
+
+**[29]** Compare the standard errors from **[21]** (heteroskedasticity-robust) and **[28]** (cluster-robust). What do you notice? Are they meaningfully different? Explain.
+
+:::{.answer}
+[Answer]{.ans} The cluster-robust standard errors are substantially larger than the heteroskedasticity-robust standard errors (like three times larger). This change results in much smaller test statistics. With the cluster-robust standard errors, we no longer have significant evidence that former-Confederate counties have different voting patterns than non-Confederate counties.
+:::
+
+**[30]** Which standard errors do you prefer? Why?
+
+:::{.answer}
+[Answer]{.ans} Open answer.
+:::

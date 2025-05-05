@@ -16,6 +16,7 @@ __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
 Helpful materials for the in-class midterm exam (May 6th):
 
+- [notes from in-class review](https://github.com/edrubin/EC421S25/midterm/prep/inclass-review.pdf)
 - [past exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams);
 - [list of topics to know](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/topics/midterm-topics.html);
 - [practice problems](https://raw.githack.com/edrubin/EC421S25/master/midterm/prep/review/midterm-review.html) (no solutions)
@@ -31,7 +32,7 @@ The problem sets should also help you review.
 
 **Problem Set 1: Heteroskedasticity, Clustering, and OLS Assumptions**
 <br>Due: Friday, 02 May 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/261057/assignments/1857218).
-<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/001/vote-data.csv) 
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/001/vote-data.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-solutions.html) 
 
 ## Lecture slides
 
