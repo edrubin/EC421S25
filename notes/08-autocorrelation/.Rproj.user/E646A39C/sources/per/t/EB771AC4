@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1557937107396.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4042069892",
+    "id" : "EB771AC4",
+    "lastKnownWriteTime" : 1558370822,
+    "last_content_update" : 1558370822,
+    "path" : "~/Dropbox/UO/Teaching/EC421S19/LectureNotes/08Autocorrelation/08_autocorrelation.Rmd",
+    "project_path" : "08_autocorrelation.Rmd",
+    "properties" : {
+        "cursorPosition" : "1530,41",
+        "scrollLine" : "11"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1556553260303.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4223663281",
+    "id" : "D5867DE0",
+    "lastKnownWriteTime" : 1557766037,
+    "last_content_update" : 1557766037,
+    "path" : "~/Dropbox/UO/Teaching/EC421S19/LectureNotes/07TimeSeries/07_time_series.Rmd",
+    "project_path" : "07_time_series.Rmd",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
