@@ -1,0 +1,18 @@
+% Custom commands
+\newcommand{\tf}[1]{%
+  \question[2.5] \textbf{[%
+    \ifprintanswers
+      \ifthenelse{\equal{#1}{T}}{\textcolor{orange}{T}}{T}%
+      /%
+      \ifthenelse{\equal{#1}{F}}{\textcolor{orange}{F}}{F}%
+    \else
+      T/F
+    \fi
+  ]}%
+}
+% \newcommand{\tf}{\question[2.5] \textbf{[T/F]} }
+\newcommand{\mc}{\question[4] \textbf{[Multiple choice]} Choose \textit{all} correct answers: }
+\newcommand{\short}{\question[5] }
+\newcommand{\eg}{\textit{e.g.}, }
+\newcommand{\ie}{\textit{i.e.}, }
+\renewcommand{\solutiontitle}{\noindent\textbf{Answer:}\enspace}
