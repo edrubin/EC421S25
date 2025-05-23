@@ -34,10 +34,13 @@ The problem sets should also help you review.
 <br>Due: Friday, 18 April 2025 by 5 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/254921/assignments/1793531).
 <br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/000/000-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/000/data-acs.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/000/000-solutions.html)
 
-
 **Problem Set 1: Heteroskedasticity, Clustering, and OLS Assumptions**
 <br>Due: Friday, 02 May 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/261057/assignments/1857218).
 <br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/001/vote-data.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/001/001-solutions.html) 
+
+**Problem Set 2: Time series data, analyses, and nonstationarity**
+<br>Due: Tuesday, 27 May 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/261057/assignments/1857218).
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/002/002-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/002/vote-data.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/002/002-solutions.html) 
 
 ## Lecture slides
 
