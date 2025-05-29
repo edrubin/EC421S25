@@ -3320,7 +3320,7 @@ window.Quarto = {
 <section id="load-the-data" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="load-the-data"><span class="header-section-number">2</span> Load the data</h2>
 <p><strong>[01]</strong> Load your <code>R</code> packages and the dataset (<code>data-ps2.csv</code>). You will probably want <code>tidyverse</code> and <code>here</code>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages using &#39;pacman&#39;</span></span>
@@ -3346,7 +3346,7 @@ dbl (8): year, exp_female, exp_male, exp_pop, pop, gdp, cpi, inf
 <li>Are there any missing values?</li>
 </ul>
 <p><em>Hint:</em> Some combination of <code>skim()</code> from <code>skimr</code> and <code>glimpse()</code> from <code>dplyr</code> could be helpful here.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use skim and glimpse to check out the data</span></span>
@@ -3556,7 +3556,7 @@ $ inf        &lt;dbl&gt; 2.2843943, 0.7590966, 0.3611232, -0.2574601, 1.4741098,
 <li>female, male, and population life expectancy (<code>exp_female</code>, <code>exp_male</code>, and <code>exp_pop</code>) <strong>all on the same plot</strong>.</li>
 </ul>
 <p><em>Hint:</em> For the last plot, you can either use <code>geom_line()</code> three different time or you can use <code>pivot_longer()</code> to reshape the data and then specify <code>color</code> in <code>aes()</code>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the time-series plots</span></span>
@@ -3610,12 +3610,12 @@ $ inf        &lt;dbl&gt; 2.2843943, 0.7590966, 0.3611232, -0.2574601, 1.4741098,
 </div>
 </div>
 <p><strong>[04]</strong> Do any of the time-series plots in <strong>[03]</strong> suggest the variables are autocorrelated? Explain your answer.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <p>Yes. Except for the inflation rate, each of the time-series plots is strongly suggestive of autocorrelation. In fact, most of the time-series plots show a clear upward trend, which is a strong indicator of autocorrelation. The inflation rate does not show a clear trend, but it does have periods of high and low inflation that could also suggest some degree of autocorrelation.</p>
 </div>
 <p><strong>[05]</strong> We’re often interested in <em>GDP per capita</em> (GDP divided by population), rather than plain <em>GDP</em>. Create a new variable in your dataset called <code>gdppc</code> that is GDP per capita. Then create a time-series plot of <code>gdppc</code> (with time on the <em>x</em>-axis).</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new variable for GDP per capita</span></span>
@@ -3641,14 +3641,14 @@ $ inf        &lt;dbl&gt; 2.2843943, 0.7590966, 0.3611232, -0.2574601, 1.4741098,
 </div>
 </div>
 <p><strong>[06]</strong> Does the time-series for GDP per capita have a different shape/trend than plain GDP? In other words: Did dividing one time-series by the other address any of your concerns from <strong>[04]</strong>? Explain your answer.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> No, dividing GDP by population did not address the concerns from <strong>[04]</strong>. The time-series for GDP per capita still shows a clear upward trend, which suggests that the variable is autocorrelated.</p>
 </div>
 </section>
 <section id="time-series-analyses" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="time-series-analyses"><span class="header-section-number">4</span> Time-series analyses</h2>
 <p><strong>[07]</strong> Let’s estimate a static model: Regress the population’s life expectancy (<code>exp_pop</code> variable) on the GDP per capita (<code>gdppc</code> variable) and the inflation rate (<code>inf</code> variable). Report your results (don’t interpret them).</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Static regression</span></span>
@@ -3672,16 +3672,16 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </div>
 </div>
 <p><strong>[08]</strong> Interpret the results from your regression in <strong>[07]</strong>. What do the coefficients on <code>gdppc</code> and <code>inf</code> suggest about the relationship between GDP per capita, inflation, and life expectancy?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> The coefficient on GDP per capita is strongly significant and positive. The interpretation: For each additional 100,000 USD in GDP per capita, life expectancy increases by approximately 13.79 years, all else equal.</p>
 <p>The coefficient on inflation is positive but not statistically significant. Its interpretation is that a one-percentage-point increase in the inflation rate is associated with a 0.10-year increase in life expectancy, all else equal.</p>
 </div>
 <p><strong>[09]</strong> Do the signs of the coefficients on <code>gdppc</code> and <code>inf</code> make sense? Why or why not?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> The sign on GDP per capita seems to make sense: more wealth often associates with better health outcomes and longer lives. The inflation result is less clear—though it also is not statistically significant. It’s important to keep in mind that we’re looking at a static model of how economic conditions at the time of birth affect estimated life expectancy. Perhaps inflation at time of birth is not meaningfully related to life expectancy.</p>
 </div>
 <p><strong>[10]</strong> Now add population (<code>pop</code>) to the static regression in <strong>[07]</strong>. Report your results (you don’t need to interpret them).</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Static regression</span></span>
@@ -3706,12 +3706,12 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </div>
 </div>
 <p><strong>[11]</strong> Did including population meaningfully change the results from the regression in <strong>[07]</strong>? Explain your answer. What’s going on here?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> Including population <em>substantially</em> changed the results. GPD per capita now has a significant and negative coefficient. Inflation is still not statistically significant, but it also has a negative coefficient.</p>
 <p>If we think about the changes in terms of the omitted-variables formula, we’ve included a variable (population) that is correlated with the previous variables and <em>may</em> have an effect on life expectancy, changing the estimated coefficients on GDP per capita and inflation.</p>
 </div>
 <p><strong>[12]</strong> Maybe we need to think more about time. Estimate a dynamic model that includes the variables from <strong>[10]</strong> <strong>plus</strong> the lag of GDP per capita and the lag of inflation.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Static regression</span></span>
@@ -3741,25 +3741,25 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </div>
 </div>
 <p><strong>[13]</strong> What is the estimated <em>total</em> effect of GDP per capita on life expectancy?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> The estimated total effect of GDP per capita on life expectancy is the sum of the coefficient on GDP per capita and the coefficient on the lagged GDP per capita. In this case, the total effect is approximately -8.302.</p>
 </div>
 <p><strong>[14]</strong> What assumptions do we need for OLS to be unbiased in <strong>[08]</strong>, <strong>[10]</strong>, and <strong>[12]</strong>? Are the assumptions realistic in this setting? Explain your answer <em>specific to this setting</em>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> The main assumption required for OLS to be unbiased here is exogeneity. (We also need variation in our explanatory variables.)</p>
 <p>Exogeneity here requires that GDP per capita, inflation, and population are independent from any other factors that affect life expectancy (<em>i.e.</em>, the disturbance). This assumption is likely violated in our setting, as many factors like healthcare access, medical technology, smoking tendencies, and enviornmental conditions all affect life expectancy and are likely correlated with GDP per capita, inflation, and population—especially since they are all trending over time.</p>
 </div>
 <p><strong>[15]</strong> In <strong>this setting</strong>, what could cause the disturbance to be autocorrelated? Given at least one example.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> As explained above, healthcare access, medical technology, smoking tendencies, and environmental conditions all affect life expectancy (<em>i.e.</em>, are in the disturbance) and are likely autocorrelated.</p>
 </div>
 <p><strong>[16]</strong> What issues would autocorrelation in the disturbance cause for OLS when estimating the model in <strong>[08]</strong> (or <strong>[12]</strong>)?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> Autocorrelation in the disturbance would (1) cause OLS to be inefficient, (2) bias our standard errors (leading to incorrect inference).</p>
 </div>
 <p><strong>[17]</strong> Use the residuals from your estimated model in <strong>[12]</strong> to test for first-order autocorrelation. Show the steps of your test and report your conclusion.</p>
 <p><em>Hint:</em> Remember that if you use the <code>residuals()</code> function, you may need to concatenate an <code>NA</code> to the beginning of the residuals vector to make the residual vector the same length as the number of observations in your dataset. For example, you can use <code>c(NA, residuals(your_regression))</code>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab the residuals</span></span>
@@ -3789,7 +3789,7 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 <p>The coefficient on the lagged residual is statistically significant at the 5-percent level (and beyond). Accordingly, we reject the null hypothesis of <em>no autocorrelation</em> in the disturbance. We conclude that there is statistically significant evidence of first-order autocorrelation in the disturbance.</p>
 </div>
 <p><strong>[18]</strong> What can one do to “deal with” autocorrelation in the disturbance? Discuss at least two options.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> There are several options to deal with autocorrelation in the disturbance:</p>
 <ol type="1">
 <li><strong>Use autocorrelation robust standard errors</strong>: This approach “fixes” the bias in our standard errors caused by autocorrelation and just lives with OLS’s inefficiency.</li>
@@ -3798,7 +3798,7 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </ol>
 </div>
 <p><strong>[19]</strong> Time for a dynamic model <em>with a lagged outcome variable</em>. Specifically, add a lagged outcome as a regressor to the model in <strong>[12]</strong>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model</span></span>
@@ -3829,7 +3829,7 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </div>
 </div>
 <p><strong>[20]</strong> Now test the disturbance in <strong>[19]</strong> for autocorrelation. Discuss the conclusion of your test.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab the residuals</span></span>
@@ -3869,35 +3869,35 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 <p>The coefficient on the lagged residual is again statistically significant at the 5-percent level. We thus reject the null hypothesis of <em>no autocorrelation</em> in the disturbance and conclude that there is statistically significant evidence of first-order autocorrelation in the disturbance.</p>
 </div>
 <p><strong>[21]</strong> What happens to OLS when we have a lagged outcome variable and the disturbance is autocorrelated?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> When we have a lagged outcome variable and the disturbance is autocorrelated, OLS is biased and inconsistent.</p>
 </div>
 <p><strong>[22]</strong> Let’s take a step back. Do you think it even makes sense to include a lagged outcome variable in the model here? Why or why not? Explain.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> I don’t think the lagged outcome variable conceptually makes sense in this context. The lagged outcome variable implies that higher life expectancy the year before I was born causes me to have a longer life expectancy. This idea doesn’t make much sense to me: life expectancy is typically a function of many factors (healthcare, environmental quality, etc.) but not usually considered to be a function of the life expectancy of people born the previous year.</p>
 </div>
 </section>
 <section id="stationarity" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="stationarity"><span class="header-section-number">5</span> Stationarity</h2>
 <p><strong>[23]</strong> Return to the time-series figures in <strong>[03]</strong> through <strong>[07]</strong>. Do any of the figures suggest that the variables may be non-stationary? Explain your answer.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> Yes! Except for inflation, all of the time-series plots suggest some type of non-stationarity due to their clear upward trends. These trends are consistent with either the mean or the variance changing over time.</p>
 </div>
 <p><strong>[24]</strong> If the data <em>are</em> non-stationarity, what problems might this cause for statistical analyses?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> If the data are non-stationary, it can cause use to recover spurious results—<em>i.e.</em>, finding relationships that do not actually exist.</p>
 </div>
 <p><strong>[25]</strong> Suppose that we’re concerned that CPI variable is non-stationary. Why might the inflation variable still have a chance at being stationary?</p>
 <p>Explain your answer using the definition of inflation below: <span class="math display">\[
 \text{inflation} = \frac{\text{CPI}_t - \text{CPI}_{t-1}}{\text{CPI}_{t-1}} \times 100
 \]</span></p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> In class we discussed the concept of <em>difference stationarity</em>. Because inflation is based upon <em>differences</em> in CPI, it may be stationary even if CPI is not.</p>
 </div>
 <p><strong>[26]</strong> One approach to deal with non-stationarity (as discussed in class) is to take differences, <em>i.e.</em>, <span class="math inline">\(\Delta x_t = x_{t} - x_{t-1}\)</span>.</p>
 <p>Create “differenced” versions of the variables <code>exp_pop</code>, <code>gdppc</code>, and <code>inf</code>.</p>
 <p>Now plot the time-series of the differenced variables. Do the time-series of the differenced variables suggest that differencing “helped” with stationary? Explain your answer.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create differenced variables</span></span>
@@ -3956,7 +3956,7 @@ Removed 1 row containing missing values or values outside the scale range
 <p><strong>[27]</strong> Now estimate the differenced version of the model form <strong>[07]</strong>, <em>i.e.</em>, estimate the following model: <span class="math display">\[
 \Delta(\text{Life expectancy})_{t} = \beta_0 + \beta_1 \Delta \text{GDPpc}_t + \beta_2 \Delta \text{Inflation}_t + \Delta u_t
 \]</span> Report your results (you don’t need to interpret them).</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Differenced regression</span></span>
@@ -3983,7 +3983,7 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </div>
 </div>
 <p><strong>[28]</strong> Interpret the results from your regression in <strong>[27]</strong>.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> First note that the coefficients in this differenced model can be interpreted in the same way as the coefficients in the non-differenced models.</p>
 <ul>
 <li>The coefficient on GDP per capita says a 100,000-dollar increase in GDP per capita is associated with a 6.935-year increase in life expectancy, all else equal. This coefficient is statistically significant at the 5-percent level.</li>
@@ -3991,11 +3991,11 @@ Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#
 </ul>
 </div>
 <p><strong>[29]</strong> How do the estimated effects of GDP per capita and inflation in <strong>[27]</strong> compare to the estimated effects in <strong>[07]</strong>? What do you think is going on here?</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> The estimated effect of GDP per capita is much smaller than in <strong>[07]</strong>—as is the (still not statistically significant) effect of inflation. The non-stationarity of the variables may have been leading us to overstate the effects of the variables, relative to the differenced model.</p>
 </div>
 <p><strong>[30]</strong> Which—if any—of the estimated models in this assignment do you think is “best”? Explain your answer.</p>
-<div style="display: none;">
+<div class="answer">
 <p><span class="ans">Answer</span> While I don’t think I <em>trust</em> any of the estimates to provide unbiased causal effects, the differenced model seems to be a bit more reasonable, as it has take more steps to address the clear non-stationarity issues in the data. We still might want to consider testing for autocorrelation and/or correcting our standard errors…</p>
 </div>
 </section>
