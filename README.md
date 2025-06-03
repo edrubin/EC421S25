@@ -18,7 +18,7 @@ Materials to prepare for the in-class final exam (June 13th):
 
 - [past exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams);
 - [list of topics to know](https://raw.githack.com/edrubin/EC421S25/master/final/prep/final-topics.html);
-- [practice problems](https://raw.githack.com/edrubin/EC421S25/master/final/prep/review/final-review.html) (no solutions)
+- [practice problems](https://raw.githack.com/edrubin/EC421S25/master/final/prep/final-review.html) (no solutions)
 
 The problem sets should also help you review.
 
