@@ -4,7 +4,7 @@ notes/0[9-9]*
 notes/1*
 
 # Temporary holds: Assignments
-problem-sets/00[3-9]
+problem-sets/00[4-9]
 
 # Notes cache
 notes/*/slides_cache/*
@@ -28,8 +28,9 @@ problem-sets/002/002-questions.qmd
 problem-sets/002/data-raw*
 problem-sets/002/clean-data*
 problem-sets/002/ed.scss
-# PS3
-problem-sets/003/data-raw*
+# PS 2
+problem-sets/003/003-questions.qmd
+problem-sets/003/ed.scss
 
 # Misc files
 *.DS_Store

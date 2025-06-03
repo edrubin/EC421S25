@@ -42,6 +42,10 @@ The problem sets should also help you review.
 <br>Due: Tuesday, 27 May 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/courses/261057/assignments/1857218).
 <br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/002/002-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/002/data-life.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/002/002-solutions.html) 
 
+**Problem Set 3: Problem Set 3: Causality, Instrumental Variables, and Review**
+<br>Due: Saturday, 07 June 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/).
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/003/003-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/003/data-life.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/003/003-solutions.html) 
+
 ## Lecture slides
 
 The slides below (linked by their topic) are .html files that will only work properly if you are connected to the internet. If you're going off grid, grab the PDFs (you'll miss out on gifs and interactive plots, but the equations will render correctly).
