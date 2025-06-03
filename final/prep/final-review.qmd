@@ -87,7 +87,3 @@ Use this equation to show how the two requirements of a valid instrument give us
 29\. Under which circumstances can we trust OLS to be unbiased and/or consistent? When is it efficient?
 
 30\. Under which circumstances is OLS to be biased and/or inconsistent?
-
-**"Suggestions"**
-
-Review the "ideal dataset/experiment" in the causality lecture and instrumental variables lecture. Explain why the "ideal" is not possible? Using the provided example data, calculate (**1**) individual treatment effects, (**2**) average treatment effects, (**3**) difference in means between the treatment and control groups, and (**4**) selection bias.

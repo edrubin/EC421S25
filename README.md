@@ -12,7 +12,17 @@ __Edward Rubin:__ Tuesdays: 1:30p–3:00p ([PLC 530](https://map.uoregon.edu/b83
 
 __Emily Arnesen:__ Wednesdays, 3:30p–4:30p (Zoom: see Canvas link)
 
-## Midterm
+## Final exam
+
+Materials to prepare for the in-class final exam (June 13th):
+
+- [past exams](https://github.com/edrubin/EC421S25?tab=readme-ov-file#exams);
+- [list of topics to know](https://raw.githack.com/edrubin/EC421S25/master/final/prep/final-topics.html);
+- [practice problems](https://raw.githack.com/edrubin/EC421S25/master/final/prep/review/final-review.html) (no solutions)
+
+The problem sets should also help you review.
+
+## Midterm exam
 
 Midterm exam and key:
 
