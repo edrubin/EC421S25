@@ -44,7 +44,7 @@ The problem sets should also help you review.
 
 **Problem Set 3: Problem Set 3: Causality, Instrumental Variables, and Review**
 <br>Due: Saturday, 07 June 2025 by 11:59 PM. Submit via [Canvas](https://canvas.uoregon.edu/).
-<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/003/003-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/003/data-life.csv) | [solutions](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/003/003-solutions.html) 
+<br>Files: [assignment](https://raw.githack.com/edrubin/EC421S25/master/problem-sets/003/003-questions.html) | [data](https://github.com/edrubin/EC421S25/tree/master/problem-sets/003/data-life.csv)
 
 ## Lecture slides
 
