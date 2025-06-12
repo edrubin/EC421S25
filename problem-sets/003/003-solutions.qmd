@@ -1,0 +1,245 @@
+---
+title: "Problem Set 3: Causality, Instrumental Variables, and Review"
+subtitle: "EC 421: Introduction to Econometrics"
+author: "Edward Rubin"
+format:
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+    theme:
+    - cosmo
+    - ed.scss
+editor:
+  render-on-save: true
+---
+
+## Instructions
+
+[**Due**]{style="text-decoration: underline;"} Upload your answer on [Canvas](https://canvas.uoregon.edu/) *before* 11:59 pm (Pacific) on Saturday, 07 June 2025.
+
+[**Optional:**]{style="text-decoration: underline;"} This assignment is optional. If you submit it on Canvas, we will grade it, and it will replace the lowest grade among your assignments. If you do not submit it, your grade will not change.
+
+[**Important**]{style="text-decoration: underline;"} You must submit your answers as an HTML or PDF file. **Do not submit an `.RMD` or `.qmd` file.** You will not receive credit for them.
+
+[**Integrity**]{style="text-decoration: underline;"} If you are suspected of cheating, then you will receive a zero—for the assignment and possibly for the course. We may report you to the dean. **Cheating includes copying from your classmates, from the internet, and from previous assignments.**
+
+[**Objective**]{style="text-decoration: underline;"} This problem set has three main purposes: (1) reinforce what you learned about causality and instrumental variables; (2) review the material from our course; (3) help you prepare for the final.
+
+## Causality
+
+
+**[01]** Use plain English (_i.e._, no math) to explain _The Fundamental Problem of Causal Inference_.
+
+:::{.answer}
+[Answer]{.ans} The _fundamental problem of causal inference_ is that we can never observe the _treated_ and _untreated_ outcomes for the same individual at the same time.
+:::
+
+**[02]** Use mathematical notation to explain _The Fundamental Problem of Causal Inference_.
+
+:::{.answer}
+[Answer]{.ans} We want to be able to calculate $\tau_i = Y_{1i} - Y_{0i}$, where $Y_{1i}$ is the outcome for individual $i$ if they are treated and $Y_{0i}$ is the outcome for individual $i$ if they are untreated. However, we can only observe one of these outcomes for each individual at a time, leading to the fundamental problem of causal inference.
+:::
+
+**[03]** Explain what we mean by _causality_ (_i.e._, based upon the potential outcomes framework).
+
+:::{.answer}
+[Answer]{.ans} Again, in the potential outcomes framework, causality refers to the comparison between to alternate states of the world, _i.e._, comparing the _treated_ outcome to the _untreated_ outcome. The difference between the two is the effect _caused_ by treatment.
+:::
+
+**[04]** What does the potential outcomes framework (as defined in class—also called the _Rubin causal model_) assume about causal effects?
+
+:::{.answer}
+[Answer]{.ans} The potential outcomes framework assumes that an individual's potential outcomes are not affected by the treatment status of other individuals.
+:::
+
+**[05]** Suppose I'm interested in estimating the effect of healthcare access on longevity. Use the potential outcomes framework to explain why it's likely a bad idea to use the difference in means between individuals with and without healthcare
+
+$$
+\textit{Avg}(\text{Longevity}_{i}|\text{Healthcare}_{i}=1) - \textit{Avg}(\text{Longevity}_{i}|\text{Healthcare}_{i}=0)
+$$
+
+to estimate the effect of healthcare on longevity.
+
+Assume $\text{Longevity}_{i}$ denotes individual $i$'s years lived and $\text{Healthcare}_{i}$ is an indicator variable for whether individual $i$ has access to healthcare.
+
+:::{.answer}
+[Answer]{.ans} The difference in means between a _treated_ group (here: those with healthcare) and an _untreated_ group (those without healthcare) is equal to the **treatment effect** _plus_ **selection bias**, _i.e._, 
+$$
+= \tau + \text{Selection bias}
+$$
+
+Here selection bias is
+$$
+= \textit{Avg}(\text{L}_{1i} | \text{Healthcare}_{i}=1) - \textit{Avg}(\text{L}_{0i} | \text{Healthcare}_{i}=0)
+$$
+where $\text{L}_{1i}$ is the longevity outcome for individual $i$ if they have healthcare and $\text{L}_{0i}$ is the longevity outcome for individual $i$ if they do not have healthcare.
+
+_Note:_ Here, as we did in class, I'm imposing the assumption that the treatment effect is constant across individuals, which is not always true in practice.
+:::
+
+**[06]** Suppose I ran a regression instead of just taking a difference in mean,  _e.g._,
+
+$$
+  \text{Longevity}_{i} = \beta_{0} + \beta_{1} \text{Healthcare}_{i} + u_{i}
+$$
+
+:::{.answer}
+[Answer]{.ans} There wasn't much of a question here. Let's move on.
+:::
+
+**[07]** Does this regression have a better chance at estimating the causal effect of healthcare on longevity? Explain your answer.
+
+:::{.answer}
+[Answer]{.ans} This regression will suffer from the same selection bias as the difference in means. Regression is just a statistical technique; it does not _fix_ selection bias.
+:::
+
+**[08]** Would your answers to the questions about change if you knew that access to healthcare was randomized? Why or why not? Explain your answer.
+
+:::{.answer}
+[Answer]{.ans} Yes! If healthcare access was randomized, then selection bias (on average) disappears, as the treated group and the control group have been pulled from the same population: there is no longer _selection_ into treatment.
+:::
+
+## Instrumental variables
+
+**[09]** In plain English (again, no math), explain the goal of instrumental variables (IV).
+
+:::{.answer}
+[Answer]{.ans} The goal of IV is to use an _instrumental variable_ to extract exogenous variation in the treatment (variable) of interest. With this exogenous variation, we are able to estimate the causal effect of te treatment _without selection bias_.
+:::
+
+**[10]** What are the two main requirements for a variable to be a valid instrument (as defined in class)?
+
+:::{.answer}
+[Answer]{.ans} The two main requirements for a variable to be a valid instrument are:
+
+1. **Relevance**: The instrument must correlate with the treatment variable (the endogenous explanatory variable).
+2. **Exogeneity**: The instrument must be independent (here: zero covariance/correlation) from the disturbance in the outcome equation (the equation we are trying to estimate). In other words, the instrument should not be related to the outcome variable except through its effect on the treatment variable.
+:::
+
+**[11]** For outcome variable $y$, explanatory variable $x$, and instrument $z$, explain the regressions you would run for
+
+- the _reduced form_;
+- the _first stage_;
+- the _second stage_.
+
+:::{.answer}
+[Answer]{.ans} Here are the regressions:
+
+- **Reduced form**: $y_i = \gamma_0 + \gamma_1 z_i + v_i$;
+- **First stage**: $x_i = \pi_0 + \pi_1 z_i + w_i$;
+- **Second stage**: $y_i = \beta_0 + \beta_1 \hat{x}_i + u_i$, where $\hat{x}_i$ is the predicted value of $x_i$ from the first stage regression.
+:::
+
+**[12]** Explain why it makes sense that the IV estimator divides the coefficient from the reduced form by the coefficient from the first stage.
+
+:::{.answer}
+[Answer]{.ans} This "ratio" makes sense because
+
+- the **numerator** (from the reduced form) estimates how changes in the instrument translate into changes in our outcome;
+- the **denominator** (from the first stage) estimates how changes in the instrument translate into changes in our treatment variable.
+
+Dividing the numerator (changes in $y$ per chanage in $z$) by the denominator (changes in $x$ per change in $z$) gives us the change in $y$ per change in $x$, which is the causal effect we are trying to estimate.
+
+Because the instrument is exogenous, we can "trust" the estimates in each part of the ratio.
+:::
+
+**[13]** Imagine you work for a real-estate startup, and your boss asks you to estimate how proximity to a bus stop affects apartment rent.
+
+Write out a regression model for your boss's desired relationship (_i.e._, the model, including $\beta$s that you would estimate).
+
+:::{.answer}
+[Answer]{.ans} One possible simple linear regression model is
+$$
+\text{Rent}_{i} = \beta_0 + \beta_1 \text{(Bus Stop Distance})_{i} + u_{i}
+$$
+
+Of course, you could add other terms (_e.g._, quadratic effects of distance), other variables (with or without interactions), and/or change the functional form (_e.g._, a log-log model).
+:::
+
+**[14]** Suppose your boss suggests that you use _house age_ as an instrumental variable. Using the two requirements of a valid instrument, discuss whether this instrument is a "good" or "bad" idea.
+
+:::{.answer}
+[Answer]{.ans} Let's evaluate the two requirements:
+
+- **Relevance**: It's definitely _possible_ that house age correlates with distance to bus stops. If older houses are closer to the city center, and the city center has more bus stops, you could find that house age is _relevant_ for bus-stop proximity. This assumption is testable!
+- **Exogeneity**: I don't think house age is exogenous. House age likely directly affects rent, which means it is correlated with the disturbance in our main equation of interest. House age likely correlates with a bunch of other variables in the disturbance (_e.g._, square footage, lot size, general quality).
+
+Because the proposed instrument fails the exogeneity requirement, it is a _bad_ instrument (and idea).
+:::
+
+## Additional topics
+
+**[15]** Why do we care about _stationarity_?
+
+:::{.answer}
+[Answer]{.ans} We care about stationarity because, we've been assuming that the data are "well behaved", _i.e._, that the properties of the data do not change over time. If things like the mean, variance, or covariance are changing over time, then we can find _spurious_ results.
+:::
+
+**[16]** Compare and contrast the concepts of _autocorrelation_ and _heteroskedasticity_.
+
+:::{.answer}
+[Answer]{.ans} Autocorrelation occurs when a variable correlates with itself through time. We often are concerned about the _disturbance_ being autocorrelated. This is mainly a time-series concept.
+
+Heteroskedasticity occurs when the variance of the disturbance's variance differs across observations. This is mainly a cross-sectional concept, but it can also occur in time-series data.
+
+Both autocorrelation and heteroskedasticity violate OLS assumptions. In static models (or models with only lagged explanatory variables), they cause similar issues: OLS is biased for the standard errors and is also inefficient.
+:::
+
+**[17]** Which of OLS assumptions relate to the _mean_ of the disturbance and which relate to the _variance_ of the disturbance?
+
+:::{.answer}
+[Answer]{.ans} The assumption of exogeneity relates to the _mean_ of the disturbance, _i.e._, $E[u|X] = 0$.
+
+The assumption of homoskedasticty relates to the _variance_ of the disturbance, _i.e._, $Var[u|X] = \sigma^2$.
+:::
+
+**[18]** Define _exogeneity_ and explain what happens when we violate it.
+
+:::{.answer}
+[Answer]{.ans} Exogeneity means that the disturbance is independent from the explanatory variables, _i.e._, $E[u | X] = 0$. When we violate exogeneity OLS estimates of regression coefficients are biased and inconsistent.
+:::
+
+**[19]** Write out a simple linear regression model (for the effect of $x$ on $y$) for each of the following specifications _and_ explain how you interpret the coefficient on $x$.
+
+- Fully linear model where $y$ and $x$ are both continuous;
+- Log-linear model where $y$ and $x$ are both continuous;
+- Log-log model where $y$ and $x$ are both continuous;
+- Linear model where $y$ is binary and $x$ is continuous;
+- Linear model where $y$ is continuous and $x$ is binary.
+
+:::{.answer}
+[Answer]{.ans} Here are the models and interpretations:
+
+**Fully linear model**
+
+- $y_i = \beta_0 + \beta_1 x_i + u_i$;
+- $\beta_1$: when $x_i$ increases by one unit, we expect $y_i$ to increase by $\beta_1$ units.
+
+**Log-linear model**
+
+- $\log(y_i) = \beta_0 + \beta_1 x_i + u_i$;
+- $\beta_1$: when $x_i$ increases by one unit, we expect $y_i$ to increase by $100 cdot \beta_1$ percent.
+
+**Log-log model**
+
+- $\log(y_i) = \beta_0 + \beta_1 log(x_i) + u_i$;
+- $\beta_1$: when $x_i$ increases by one percent, we expect $y_i$ to increase by $\beta_1$ percent.
+
+**Linear model with binary $y$ and continuous $x$**
+
+- $y_i = \beta_0 + \beta_1 x_i + u_i$;
+- $\beta_1$: when $x_i$ increases by one unit, we expect the probability that $y_i = 1$ to increase by $\beta_1$.
+
+**Linear model with continuous $y$ and binary $x$**
+
+- $y_i = \beta_0 + \beta_1 x_i + u_i$;
+- $\beta_1$ gives the average difference in $y_i$ between the two groups defined by $x_i$ (where $x_i = 1$ is one group and $x_i = 0$ is the other group).
+
+:::
+  
+**[20]** Explain what information standard errors provide in the context of OLS regression.
+
+:::{.answer}
+[Answer]{.ans} Standard errors provide information about the uncertainty inherent to our estimates of the population parameters. They tell us the (estimated) standard deviation of the sampling distribution of our estimator: bigger standard errors mean more uncertainty.
+:::
